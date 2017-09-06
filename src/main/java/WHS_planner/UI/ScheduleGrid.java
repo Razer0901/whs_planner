@@ -35,7 +35,7 @@ public class ScheduleGrid extends GridPane {
         }
 //
         try {
-            JSONArray courses = ESchoolHandler.getCourses("********", "********");
+            JSONArray courses = ESchoolHandler.getCourses("","");
             for(Object rawCourse: courses){
                 JSONObject course = (JSONObject) rawCourse;
                 String[] days = ((String) course.get("days")).split(", ");

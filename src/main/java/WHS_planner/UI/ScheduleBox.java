@@ -29,14 +29,17 @@ public class ScheduleBox extends VBox {
 
         periodLabel = new Label();
         periodLabel.prefWidthProperty().bind(this.widthProperty());
+        periodLabel.setTextAlignment(TextAlignment.CENTER);
         periodLabel.setAlignment(Pos.CENTER);
 
         teacherLabel = new Label();
         teacherLabel.prefWidthProperty().bind(this.widthProperty());
+        teacherLabel.setTextAlignment(TextAlignment.CENTER);
         teacherLabel.setAlignment(Pos.CENTER);
 
         roomLabel = new Label();
         roomLabel.prefWidthProperty().bind(this.widthProperty());
+        roomLabel.setTextAlignment(TextAlignment.CENTER);
         roomLabel.setAlignment(Pos.CENTER);
 
         this.getChildren().addAll(nameLabel,teacherLabel,roomLabel,periodLabel);
