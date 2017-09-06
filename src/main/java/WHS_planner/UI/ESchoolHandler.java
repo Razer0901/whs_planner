@@ -1,13 +1,17 @@
 package WHS_planner.UI;
 
+import WHS_planner.Main;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
 
@@ -86,12 +90,14 @@ public class ESchoolHandler {
      * @throws LoginException Thrown if login failed
      * @throws IOException General IO exceptions
      */
-    private static JSONArray getCourses(String username, String password) throws LoginException, IOException{
+    public static JSONArray getCourses(String username, String password) throws LoginException, IOException{
         //Splits rawCourseTable into individual rows
         Elements rawCourses = getRawCourseTable(username, password).getElementsByTag("tr");
 
-        //Removes the first row (table headers)
+        //Remove the first row (table headers)
         Elements dataKeys = rawCourses.remove(0).getElementsByTag("td");
+        //Remove the final row (Advisory)
+        rawCourses.remove(rawCourses.size()-1);
 
         //Initializes JSONArray to store courses
         JSONArray courses = new JSONArray();
