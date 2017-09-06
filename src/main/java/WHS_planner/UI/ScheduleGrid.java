@@ -23,7 +23,7 @@ public class ScheduleGrid extends GridPane {
     };
 
     public ScheduleGrid(){
-        this.setStyle("-fx-background-color: #F1F1F1;");
+        this.setStyle("-fx-background-color: #F1F1F1; -fx-font-size: 12px;");
         this.setGridLinesVisible(false);
 
         for (int r = 0; r < 6; r++) {
@@ -56,8 +56,9 @@ public class ScheduleGrid extends GridPane {
 
                     ScheduleBox tempBox = (ScheduleBox) getNodeByRowColumnIndex(tempBlock,letterDay,this);
                     tempBox.setName((String)course.get("name"));
-                    tempBox.setTeacher((String)course.get("teacher"));
-                    tempBox.setPeriod((String)course.get("period"));
+                    String[] teacherNames = ((String)course.get("teacher")).split(", ");
+                    tempBox.setTeacher(teacherNames[1] + " " + teacherNames[0]);
+                    tempBox.setPeriod("Period: " + (String)course.get("period"));
                     tempBox.setRoom((String)course.get("room"));
                 }
 
