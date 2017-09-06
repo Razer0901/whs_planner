@@ -33,7 +33,7 @@ public class ScheduleGrid extends GridPane {
                 this.add(temp,c,r);
             }
         }
-//
+
         try {
             JSONArray courses = ESchoolHandler.getCourses("","");
             for(Object rawCourse: courses){
@@ -56,9 +56,8 @@ public class ScheduleGrid extends GridPane {
 
                     ScheduleBox tempBox = (ScheduleBox) getNodeByRowColumnIndex(tempBlock,letterDay,this);
                     tempBox.setName((String)course.get("name"));
-                    String[] teacherNames = ((String)course.get("teacher")).split(", ");
-                    tempBox.setTeacher(teacherNames[1] + " " + teacherNames[0]);
-                    tempBox.setPeriod("Period: " + (String)course.get("period"));
+                    tempBox.setTeacher(((String)course.get("teacher")).split(",")[0]);
+                    tempBox.setPeriod((String)course.get("period"));
                     tempBox.setRoom((String)course.get("room"));
                 }
 

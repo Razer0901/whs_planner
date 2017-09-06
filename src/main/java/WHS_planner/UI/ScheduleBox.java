@@ -16,6 +16,7 @@ public class ScheduleBox extends VBox {
 
     public ScheduleBox(){
         this.setStyle("-fx-background-color: #ffffff");
+        this.setAlignment(Pos.CENTER);
         this.toBack();
         this.setBorder(new Border(new BorderStroke(Color.rgb(241,241,241,1),
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderStroke.THIN)));
@@ -50,7 +51,7 @@ public class ScheduleBox extends VBox {
     }
 
     public void setPeriod(String text){
-        periodLabel.setText(text);
+        periodLabel.setText("Period: " + text);
     }
 
     public void setTeacher(String text){
