@@ -26,8 +26,8 @@ public class ScheduleGrid extends GridPane {
         this.setStyle("-fx-background-color: #F1F1F1; -fx-font-size: 12px;");
         this.setGridLinesVisible(false);
 
-        for (int r = 0; r < 6; r++) {
-            for (int c = 0; c < 8; c++) {
+        for (int r = 1; r < 7; r++) {
+            for (int c = 1; c < 9; c++) {
                 ScheduleBox temp = new ScheduleBox();
                 temp.setMinSize(130,100);
                 this.add(temp,c,r);
