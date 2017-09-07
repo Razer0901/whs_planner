@@ -105,7 +105,10 @@ public class Main extends Application {
             File dayArrayFile = new File(Main.SAVE_FOLDER + File.separator + "DayArray.json");
             if(dayArrayFile.exists()){
                 BufferedReader br = new BufferedReader(new FileReader(dayArrayFile));
-                if (br.readLine() == null || !br.readLine().contains("flag")) {
+//                System.out.println(!br.readLine().contains("flag"));
+                boolean flagCheck = !br.readLine().contains("flag");
+                if (br.readLine() == null || flagCheck) {
+                    System.out.println("in");
                     needToPasteDayArray = true;
                     dayArrayFile.delete();
                 }
