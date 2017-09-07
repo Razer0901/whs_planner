@@ -13,15 +13,6 @@ public class MainUI extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-        try {
-            ScheduleBox temp = new ScheduleBox();
-            temp.setName("HI");
-            Scene scene = new Scene(temp);
-            stage.setScene(scene);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
 
-        stage.show();
     }
 }

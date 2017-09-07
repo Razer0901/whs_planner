@@ -17,11 +17,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -56,6 +54,7 @@ public class Schedule
 
     public Schedule(JFXCheckBox checkBox)
     {
+
         this.checkBox = checkBox;
         this.checkBox.setOnAction(e -> Platform.runLater(this::resetLabels));
 
@@ -501,5 +500,25 @@ public class Schedule
         File g = new File(Main.SAVE_FOLDER+ File.separator +"Schedule.json");
 
         return g.exists();
+    }
+
+    public void saveClasslist(JSONArray data){
+        try (FileWriter file = new FileWriter(Main.SAVE_FOLDER+ File.separator +"Classlist.json")) {
+            file.write(data.toJSONString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public JSONArray loadClasslist(){
+        JSONParser parser = new JSONParser();
+        Object obj = null;
+        try {
+            obj = parser.parse(new FileReader(Main.SAVE_FOLDER + File.separator + "Classlist.json"));
+            return (JSONArray) obj;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return (JSONArray) obj;
     }
 }
