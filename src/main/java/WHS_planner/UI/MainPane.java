@@ -553,8 +553,8 @@ public class MainPane extends StackPane {
         //Pane meeting = new MeetingPane();
         Home homePane = new Home(calendar, news.getCardView());
         addPane(homePane);
-//        addPane((Pane) schedule.getPane());
-        addPane(new ScheduleGrid());
+        addPane((Pane) schedule.getPane());
+//        addPane(new ScheduleGrid());
         //addPane(meeting);
 
         content.getChildren().add(contentPanes.get(0)); //Sets home tab as default
