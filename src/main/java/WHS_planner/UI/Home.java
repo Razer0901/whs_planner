@@ -16,6 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -26,6 +28,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,7 +41,7 @@ class Home extends Pane {
     private JFXCheckBox checkBox;
     private HBox outsidePane = new HBox();
     private VBox insidePane = new VBox();
-//    private JFXProgressBar progressBar = new JFXProgressBar();
+    //    private JFXProgressBar progressBar = new JFXProgressBar();
     private ProgressBar progressBar = new ProgressBar();
     private Timer progressbarTimer;
     private Tooltip tooltip = new Tooltip();
@@ -54,12 +57,14 @@ class Home extends Pane {
     private ScrollPane dayScroll;
     private VBox dayView = new VBox();
 
+    private ArrayList tasks = new ArrayList<>();
+
     Home(CalendarYear calendar, Pane newsUI) {
         calYear = calendar;
         globalTime = new GlobalTime(calendar.getSchedule().getCheck());
 
         File day = new File(Main.SAVE_FOLDER + File.separator + "DayArray.json");
-        if(day.exists()) {
+        if (day.exists()) {
             pc.readData();
         }
         //pc.readData();
@@ -116,9 +121,7 @@ class Home extends Pane {
 //        outsidePane.getChildren().addAll(insidePane,newsScroll);
 
         //Need to remove News to blackmail WSPN? uncomment this line
-        outsidePane.getChildren().setAll(insidePane,newsScroll);
-
-
+        outsidePane.getChildren().setAll(insidePane, newsScroll);
 
 
 //        for (int i = 0; i < tasks.size(); i++) {
@@ -155,7 +158,7 @@ class Home extends Pane {
             double d = 1.0 - progressVal();
             progressBar.setProgress(d);
             int classIndex = globalTime.getClassIndex();
-            if(day.exists() && day.length() > 0 && calendar.getSchedule().isLoggedIn()) {
+            if (day.exists() && day.length() > 0 && calendar.getSchedule().isLoggedIn()) {
                 if (classIndex == -1 || pc.getDay(today).length() != 1) {
                     System.out.println("tooltip is null!");
                     progressBar.setTooltip(null);
@@ -168,8 +171,7 @@ class Home extends Pane {
                 } else if (classIndex == -2) {
                     progressBar.setTooltip(tooltip);
                     tooltip.setText("Advisory" + "\nTime left: \n" + timeLeft() + " min");
-                }
-                else {
+                } else {
                     progressBar.setTooltip(tooltip);
 //                System.out.println(globalTime.getLetterDay());
 //                System.out.println(calendar.getSchedule().getToday(globalTime.getLetterDay()));
@@ -185,7 +187,7 @@ class Home extends Pane {
                         e.printStackTrace();
                     }
 //                    System.out.println("it got past the line of code...");
-                    if(currentClass != null) {
+                    if (currentClass != null) {
                         tooltip.setText(currentClass + "\nTime left: \n" + timeLeft() + " min");
 //                        System.out.println("scenario 1, not null");
                     } else {
@@ -194,7 +196,7 @@ class Home extends Pane {
                     }
 //                String currentClass = calendar.getSchedule().getToday(today)[classIndex].getClassName();
                 }
-            } else{
+            } else {
                 tooltip.setText("Time left: \n" + timeLeft() + " min");
             }
 
@@ -215,7 +217,7 @@ class Home extends Pane {
                 calendar.getThisMonth().hitAllOfTheDabs();
             }
             i[0]++;
-            if (day.exists()&& day.length() > 0 && calendar.getSchedule().isLoggedIn()) {
+            if (day.exists() && day.length() > 0 && calendar.getSchedule().isLoggedIn()) {
                 if (classIndex == -1 || pc.getDay(today).length() != 1) {
                     progressBar.setTooltip(null);
                 } else if (classIndex == -4) {
@@ -257,7 +259,7 @@ class Home extends Pane {
             double d = 1.0 - progressVal();
             progressBar.setProgress(d);
             int classIndex = globalTime.getClassIndex();
-            if (day.exists()&& day.length() > 0 && calendar.getSchedule().isLoggedIn()) {
+            if (day.exists() && day.length() > 0 && calendar.getSchedule().isLoggedIn()) {
                 if (classIndex == -1 || pc.getDay(today).length() != 1) {
                     progressBar.setTooltip(null);
                 } else if (classIndex == -4) {
@@ -292,8 +294,8 @@ class Home extends Pane {
         this.getChildren().setAll(outsidePane);
     }
 
-    void switchPanes(){
-        if(outsidePane.getChildren().get(1) == newsScroll) {
+    void switchPanes() {
+        if (outsidePane.getChildren().get(1) == newsScroll) {
             outsidePane.getChildren().remove(newsScroll);
             outsidePane.getChildren().add(dayScroll);
         } else {
@@ -319,7 +321,7 @@ class Home extends Pane {
 
     private double progressVal() {
         int n = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-        if(n == Calendar.SATURDAY || n == Calendar.SUNDAY) {
+        if (n == Calendar.SATURDAY || n == Calendar.SUNDAY) {
             return 0;
         }
         Date date = new Date();
@@ -335,15 +337,15 @@ class Home extends Pane {
                 mod = (495 - num) / 5.0; //pass time
             } else if (num >= 495 && num < 535) {
                 mod = (535 - num) / 40.0;
-            }  else if (num >= 535 && num < 545) {
+            } else if (num >= 535 && num < 545) {
                 mod = (545 - num) / 10.0; //pass time
             } else if (num >= 545 && num < 570) {
                 mod = (570 - num) / 25.0;
-            }  else if (num >= 570 && num < 575) {
+            } else if (num >= 570 && num < 575) {
                 mod = (575 - num) / 5.0; //pass time
             } else if (num >= 575 && num < 615) {
                 mod = (615 - num) / 45.0;
-            }  else if (num >= 615 && num < 620) {
+            } else if (num >= 615 && num < 620) {
                 mod = (620 - num) / 5.0; //pass time
             } else if (num >= 620 && num < 695) {
                 mod = (695 - num) / 75.0;
@@ -351,7 +353,7 @@ class Home extends Pane {
                 mod = (700 - num) / 5.0; //pass time
             } else if (num >= 700 && num < 740) {
                 mod = (745 - num) / 45.0;
-            }  else if (num >= 740 && num < 745) {
+            } else if (num >= 740 && num < 745) {
                 mod = (745 - num) / 5.0; //pass time
             } else if (num >= 745 && num <= 785) {
                 mod = (785 - num) / 40.0;
@@ -396,23 +398,23 @@ class Home extends Pane {
 //            System.out.println("num: " + num);
             if (num >= 450 && num < 506) { //7:30-8:26
                 mod = (506 - num) / 62.0;
-            } else if (num >=506 && num < 512) {
+            } else if (num >= 506 && num < 512) {
                 mod = (512 - num) / 5.0; //pass time
             } else if (num >= 512 && num < 568) {//8:31-9:28
                 mod = (568 - num) / 67.0;
-            } else if (num >=568 && num < 578) {
+            } else if (num >= 568 && num < 578) {
                 mod = (578 - num) / 10.0; //pass time
             } else if (num >= 578 && num < 635) {// 9:38-10:35
                 mod = (635 - num) / 62.0;
-            } else if (num >=635 && num < 640) {
+            } else if (num >= 635 && num < 640) {
                 mod = (640 - num) / 5.0; //pass time
             } else if (num >= 640 && num < 731) { //10:40-12:11
                 mod = (731 - num) / 95.0;
-            } else if (num >=731 && num < 736) {
+            } else if (num >= 731 && num < 736) {
                 mod = (736 - num) / 5.0; //pass time
             } else if (num >= 736 && num < 793) { //12:16-1:13
                 mod = (793 - num) / 62.0;
-            } else if (num >=793 && num < 798) {
+            } else if (num >= 793 && num < 798) {
                 mod = (798 - num) / 5.0; //pass time
             } else if (num >= 798 && num <= 855) { //1:18-2:15
                 mod = (855 - num) / 57.0;
@@ -426,8 +428,7 @@ class Home extends Pane {
 
     private int timeLeft() {
         int n = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-        if(n == Calendar.SATURDAY || n == Calendar.SUNDAY)
-        {
+        if (n == Calendar.SATURDAY || n == Calendar.SUNDAY) {
             return 0;
         }
         Date date = new Date();
@@ -442,15 +443,15 @@ class Home extends Pane {
                 mod = (495 - num); //pass time
             } else if (num >= 495 && num < 535) {
                 mod = (535 - num);
-            }  else if (num >= 535 && num < 545) {
+            } else if (num >= 535 && num < 545) {
                 mod = (545 - num); //pass time
             } else if (num >= 545 && num < 570) {
                 mod = (570 - num);
-            }  else if (num >= 570 && num < 575) {
+            } else if (num >= 570 && num < 575) {
                 mod = (575 - num); //pass time
             } else if (num >= 575 && num < 615) {
                 mod = (615 - num);
-            }  else if (num >= 615 && num < 620) {
+            } else if (num >= 615 && num < 620) {
                 mod = (620 - num); //pass time
             } else if (num >= 620 && num < 695) {
                 mod = (695 - num);
@@ -458,7 +459,7 @@ class Home extends Pane {
                 mod = (700 - num); //pass time
             } else if (num >= 700 && num < 740) {
                 mod = (745 - num);
-            }  else if (num >= 740 && num < 745) {
+            } else if (num >= 740 && num < 745) {
                 mod = (745 - num); //pass time
             } else if (num >= 745 && num <= 785) {
                 mod = (785 - num);
@@ -498,23 +499,23 @@ class Home extends Pane {
         } else {
             if (num >= 450 && num < 506) { //7:30-8:26
                 mod = (506 - num);
-            } else if (num >=506 && num < 512) {
+            } else if (num >= 506 && num < 512) {
                 mod = (512 - num); //pass time
             } else if (num >= 512 && num < 568) {//8:31-9:28
                 mod = (568 - num);
-            } else if (num >=568 && num < 578) {
+            } else if (num >= 568 && num < 578) {
                 mod = (578 - num); //pass time
             } else if (num >= 578 && num < 635) {// 9:38-10:35
                 mod = (635 - num);
-            } else if (num >=635 && num < 640) {
+            } else if (num >= 635 && num < 640) {
                 mod = (640 - num); //pass time
             } else if (num >= 640 && num < 731) { //10:40-12:11
                 mod = (731 - num);
-            } else if (num >=731 && num < 736) {
+            } else if (num >= 731 && num < 736) {
                 mod = (736 - num); //pass time
             } else if (num >= 736 && num < 793) { //12:16-1:13
                 mod = (793 - num);
-            } else if (num >=793 && num < 798) {
+            } else if (num >= 793 && num < 798) {
                 mod = (798 - num); //pass time
             } else if (num >= 798 && num <= 855) { //1:18-2:15
                 mod = (855 - num);
@@ -534,40 +535,42 @@ class Home extends Pane {
         return min;
     }
 
-    private void checkForSpecialDayTooltip(Tooltip temp){
+    private void checkForSpecialDayTooltip(Tooltip temp) {
 
         Calendar now = Calendar.getInstance();
 
         ArrayList<String> bellTimesFile = new ArrayList<>();
         try (Stream<String> stream = Files.lines(Paths.get(Main.SAVE_FOLDER + File.separator + "BellTimes.txt"))) {
             stream.forEachOrdered(bellTimesFile::add);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        while(bellTimesFile.size()>4) {
+        while (bellTimesFile.size() > 4) {
             if (now.get(Calendar.MONTH) == Integer.parseInt(bellTimesFile.get(0)) - 1 && now.get(Calendar.DAY_OF_MONTH) == Integer.parseInt(bellTimesFile.get(1)) && now.get(Calendar.YEAR) == Integer.parseInt(bellTimesFile.get(2))) {
                 temp.setText("Today is a special schedule, check 'Bell Schedule' for the updated info!");
                 break;
-            }else{
+            } else {
                 int numberOfRows = Integer.parseInt(bellTimesFile.get(3));
-                for (int i = 0; i < numberOfRows*2+4; i++) {
+                for (int i = 0; i < numberOfRows * 2 + 4; i++) {
                     bellTimesFile.remove(0);
                 }
             }
         }
     }
 
-    void getTasks() {
-        System.out.println("GET TASKS CALLED ---------");
-        ArrayList tasks = new ArrayList<>();
+    private void buildTaskList() {
+        // xD code to fish for every task in the year below
 
+//        System.out.println("GET TASKS CALLED ---------");
+//        ArrayList tasks = new ArrayList<>();
+        tasks.clear();
         for (int i = 0; i < calYear.getYear().length; i++) {
             CalendarBox[][] calBoxes = calYear.getYear()[i].getBoxes();
             for (int j = 0; j < calBoxes.length; j++) {
                 for (int k = 0; k < calBoxes[0].length; k++) {
-                    if(calBoxes[j][k]!=null){
-                        if (calBoxes[j][k].getTasks().get(0).size() > 0){
+                    if (calBoxes[j][k] != null) {
+                        if (calBoxes[j][k].getTasks().get(0).size() > 0) {
 
 //                            Text taskDate = calBoxes[j][k].getDateLabel();
 //                            tasks.add(taskDate);
@@ -584,12 +587,12 @@ class Home extends Pane {
 
                             }
 
-                            System.out.println(calBoxes[j][k].getTasks().get(0).size() + "date " + calBoxes[j][k].getDate());
+//                            System.out.println(calBoxes[j][k].getTasks().get(0).size() + "date " + calBoxes[j][k].getDate());
                         }
                         //extra loop,0th index of task array array is tasks we want
                         for (int l = 0; l < calBoxes[j][k].getTasks().size(); l++) {
                             for (int m = 0; m < calBoxes[j][k].getTasks().get(l).size(); m++) {
-                                if(calBoxes[j][k].getTasks().get(l).get(m).doesExist()) {
+                                if (calBoxes[j][k].getTasks().get(l).get(m).doesExist()) {
                                     tasks.add(calBoxes[j][k].getTasks().get(l).get(m));
 
                                 }
@@ -601,9 +604,27 @@ class Home extends Pane {
                 }
             }
         }
+
+    }
+
+
+    void getTasks() {
+        buildTaskList();
         dayView.getChildren().clear();
 
-        if(tasks.isEmpty()) {
+        if (!tasks.isEmpty()) {
+
+            for (Object task : tasks) {
+                if (task instanceof Task) {
+                    dayView.getChildren().addAll(((Task) task).getPane());
+                } else if (task instanceof Text) {
+                    dayView.getChildren().addAll((Text) task);
+//                    dayView.getChildren().addAll(new Label(new String(Integer.toString(tasks.get(i)))));
+                }
+
+            }
+        } else {
+            //Random hard coded scaling for when user has no tasks. Doesn't matter because dayView/News width never changes
             Label cleared = new Label("All caught up!");
 //            BorderPane noTasksPane = new BorderPane();
             //top, right, bottom, left
@@ -622,26 +643,33 @@ class Home extends Pane {
             System.out.println("dv height: " + dayView.getPrefHeight());
             cleared.getStylesheets().add("UI" + File.separator + "Main.css");
             cleared.getStyleClass().addAll("no-tasks-label");
+            Image frame0 = new Image(("UI" + File.separator + "BellAnimation" + File.separator + "mr-jingle0.png"));
+//            Image frame0 = new Image(("UI" + File.separator+ "google-plus-jingle.gif"));
 
+
+            ImageView bell;
+            bell = new ImageView(frame0);
+            bell.setScaleY(.25);
+            bell.setScaleX(.25);
+
+            bell.setOnMouseClicked((event) -> {
+
+            });
+            HBox bellContainer = new HBox(bell);
+            bellContainer.setAlignment(Pos.CENTER);
+            bellContainer.setTranslateY(240);
+            dayView.getChildren().addAll(bellContainer, cleared);
 
 //            noTasksPane.setCenter(cleared);
 //            dayView.getChildren().addAll(noTasksPane);
-            dayView.getChildren().addAll(cleared);
-        } else {
-            for (Object task : tasks) {
-                if (task instanceof Task) {
-                    dayView.getChildren().addAll(((Task) task).getPane());
-                } else if (task instanceof Text) {
-                    dayView.getChildren().addAll((Text) task);
-//                    dayView.getChildren().addAll(new Label(new String(Integer.toString(tasks.get(i)))));
-                }
-            }
+//                dayView.getChildren().addAll(cleared);
+
+        }
 //            for (Task task : tasks) {
 //                dayView.getChildren().addAll(task.getPane());
 //            }
-        }
-
     }
-    
-    
+
 }
+
+

@@ -1,6 +1,7 @@
 package WHS_planner.Calendar;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.geometry.Insets;
 import com.jfoenix.controls.JFXTextField;
 import javafx.geometry.Pos;
 import javafx.scene.input.KeyCode;
