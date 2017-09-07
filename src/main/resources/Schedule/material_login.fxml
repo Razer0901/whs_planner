@@ -14,7 +14,7 @@
     <children>
         <Pane fx:id="loginPane" maxHeight="360.0" maxWidth="360.0" minHeight="360.0" minWidth="360.0" prefHeight="360.0" prefWidth="360.0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 15, 0, 1, 2, 0); -fx-background-color: #FFFFFF;">
             <children>
-                <Label layoutX="85.0" layoutY="22.0" text="Login to iPass">
+                <Label layoutX="31.0" layoutY="22.0" text="Login to eSchoolPlus">
                     <font>
                         <Font name="Roboto" size="30.0" />
                     </font>

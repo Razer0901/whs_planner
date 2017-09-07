@@ -35,6 +35,7 @@ public class Schedule
     private final String[] wene = {"8:10", "8:55", "10:15", "11:35", "12:20", "1:05", "0:00"};
     private final String[] bells = {"7:30", "8:26", "9:58", "10:55", "12:26", "1:23", "0:00"};
     private final String[] belle = {"8:21", "9:18", "10:50", "12:21", "1:18", "2:15", "0:00"};
+    public static String SCHEDULE_PATH = Main.SAVE_FOLDER+ File.separator +"Schedule.json";
 
     private Integer[][] periodGrid = {
             {1,2,3,5,6,7}, //A & E
@@ -137,14 +138,11 @@ public class Schedule
             }
         });
 
-        File g = new File(Main.SAVE_FOLDER+ File.separator +"Schedule.json");
+        File g = new File(SCHEDULE_PATH);
 
-        if(!g.exists())
-        {
+        if(!g.exists()) {
             schedule = new Scene(login);
-        }
-        else
-        {
+        } else {
             generateSchedule(loader);
             schedule = new Scene(rootLayout);
         }
@@ -159,7 +157,7 @@ public class Schedule
         labels = loader.getNamespace();
 
         try {
-            JSONArray courses = ESchoolHandler.getCourses("Tyler_Brient","@Wps#501292");
+            JSONArray courses = loadClasslist();
             for(Object rawCourse: courses){
                 JSONObject course = (JSONObject) rawCourse;
                 String[] days = ((String) course.get("days")).split(", ");
@@ -233,7 +231,7 @@ public class Schedule
             e.printStackTrace();
         }
 
-        for (int i = 1; i <= 7; i++)
+        for (int i = 1; i <= 6; i++)
         {
             Label l = (Label) labels.get("Time"+i);
 
@@ -353,75 +351,6 @@ public class Schedule
 //        }
     }
 
-    private void parseSchedule()
-    {
-        File f = new File(Main.SAVE_FOLDER+ File.separator +"output.html");
-
-        File input = new File(Main.SAVE_FOLDER + File.separator +"Keys/ipass.key");
-
-        String user = null;
-        String pass = null;
-
-        try
-        {
-            if(!input.exists())
-            {
-                input.createNewFile();
-            }
-
-            FileReader fr = new FileReader(input);
-            BufferedReader br = new BufferedReader(fr);
-
-            user = br.readLine();
-            pass = br.readLine();
-
-            user = XorTool.decode(user, Main.getXorKey());
-            pass = XorTool.decode(pass, Main.getXorKey());
-
-            br.close();
-            fr.close();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-
-
-        ScheduleParserV3 parse = new ScheduleParserV3();
-
-        if(!f.exists() && user != null && pass != null )
-        {
-            final String u = user;
-            final String p = pass;
-
-            Thread t = new Thread(() ->
-            {
-                parse.grabwebpage(u, p);
-
-            });
-            t.start();
-            try
-            {
-                t.join();
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-
-            try
-            {
-                parse.getClasses();
-                f.delete();
-            }
-            catch(IOException ie)
-            {
-                ie.printStackTrace();
-            }
-        }
-
-    }
-
     public ScheduleBlock[] getData()
     {
         File schedulefile = new File(Main.SAVE_FOLDER+ File.separator +"Schedule.json");
@@ -433,18 +362,45 @@ public class Schedule
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            parseSchedule();
-
+            return new ScheduleBlock[0];
         }
-        IO dotaIo = new IO(Main.SAVE_FOLDER+ File.separator +"Schedule.json");
-        ArrayList<ScheduleBlock> array = dotaIo.readScheduleArray();
-        dotaIo.unload();
 
-        ScheduleBlock[] blocks = new ScheduleBlock[array.size()];
-        for(int i = 0; i < array.size(); i++)
-        {
-            blocks[i] = array.get(i);
+        ScheduleBlock[][] tempGrid = new ScheduleBlock[6][8];
+
+        JSONArray courses = loadClasslist();
+        for(Object rawCourse: courses){
+            JSONObject course = (JSONObject) rawCourse;
+            String[] days = ((String) course.get("days")).split(", ");
+            ArrayList<Integer> letterDays = new ArrayList<>();
+            for(String day: days){
+                char[] ch  = day.toCharArray();
+                for(char c : ch)
+                {
+                    int temp = (int)c;
+                    int temp_integer = 64; //for upper case
+                    if(temp<=90 & temp>=65)
+                        letterDays.add(temp-temp_integer-1);
+                }
+            }
+
+            for(int letterDay: letterDays){
+                int tempBlock = Arrays.asList(periodGrid[letterDay%4]).indexOf(Integer.parseInt((String)course.get("period")));
+                tempGrid[tempBlock][letterDay] = new ScheduleBlock((String)course.get("name"),((String)course.get("teacher")).split(",")[0],(String)course.get("room"),(String)course.get("period"));
+            }
+        }
+
+        blocks = new ScheduleBlock[48];
+        int counter = 0;
+        for (int r = 0; r < 6; r++) {
+            for (int c = 0; c < 8; c++) {
+                ScheduleBlock temp = tempGrid[r][c];
+                if(temp != null){
+                    blocks[counter] = temp;
+                }else{
+                    blocks[counter] = new ScheduleBlock("Free", "Free", "Free", "Free");
+                }
+                counter ++;
+            }
         }
 
         return blocks;
@@ -502,19 +458,11 @@ public class Schedule
         return g.exists();
     }
 
-    public void saveClasslist(JSONArray data){
-        try (FileWriter file = new FileWriter(Main.SAVE_FOLDER+ File.separator +"Classlist.json")) {
-            file.write(data.toJSONString());
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
     public JSONArray loadClasslist(){
         JSONParser parser = new JSONParser();
         Object obj = null;
         try {
-            obj = parser.parse(new FileReader(Main.SAVE_FOLDER + File.separator + "Classlist.json"));
+            obj = parser.parse(new FileReader(SCHEDULE_PATH));
             return (JSONArray) obj;
         }catch (Exception e){
             e.printStackTrace();

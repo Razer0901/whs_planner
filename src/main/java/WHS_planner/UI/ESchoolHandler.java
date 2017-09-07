@@ -68,6 +68,7 @@ public class ESchoolHandler {
         //Login with correct credentials
         Jsoup.connect(ESCHOOL_LOGIN_URL)
                 .userAgent(USER_AGENT)
+                .timeout(10000) //Time out at 10 secs
                 .data("Database", "850") //850 is the "ID" for the Wayland PS Live "District"
                 .data("LogOnDetails.UserName", username)
                 .data("LogOnDetails.Password", password)

@@ -1,6 +1,8 @@
 package WHS_planner.Schedule;
 
 import WHS_planner.Main;
+import WHS_planner.UI.ESchoolHandler;
+import WHS_planner.UI.LoginException;
 import WHS_planner.UI.MainPane;
 import WHS_planner.Util.UserLoggedIn;
 import WHS_planner.Util.XorTool;
@@ -14,10 +16,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import org.json.simple.JSONArray;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -53,63 +58,58 @@ public class loginController implements Initializable
 
         if(username.equals("") || pass.equals("")) {
             error.setTextFill(Color.BLACK);
-            error.setText("Please enter your iPass information");
+            error.setText("Please enter your eSchoolPlus information");
         } else {
             try {
-                GrabDayV2 gd = new GrabDayV2(username, pass);
-                if(gd.testConn()) {
-                    error.setTextFill(Color.GREEN);
-                    error.setText("Logging in, please wait...");
-                    loginPane.requestLayout();
-                    button.setDisable(true);
-                    File f = new File(Main.SAVE_FOLDER+ File.separator +"Keys"+File.separator +"ipass.key");
-                    if(!f.exists()) {
-                        f.createNewFile();
-                    }
-                    BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-                    String xorKey = Main.getXorKey();
-                    username = XorTool.encode(username, xorKey);
-                    pass = XorTool.encode(pass, xorKey);
+                error.setTextFill(Color.GREEN);
+                error.setText("Logging in, please wait...");
+                loginPane.requestLayout();
+                button.setDisable(true);
+                saveClasslist(ESchoolHandler.getCourses(username,pass));
 
-                    bw.write(username);
-                    bw.newLine();
-                    bw.write(pass);
-                    bw.close();
-
-//                    error.setTextFill(Color.RED);
-                    //error.setText("iPass internal error. Restart and run clean.sh");
-
-                    /*
-                    //TODO
-                    show button,
-                    error.setText("iPass internal error. Restart and try again");
-                    button calls logout method in ScheduleController and quits to program
-                     */
-                    try{
-
-                        PauseTransition ps = new PauseTransition(Duration.seconds(1));
-                        ps.setOnFinished(event -> {
-                            try {
-                                MainPane mp = (MainPane) Main.getMainPane();
-                                mp.resetSchedule();
-                                UserLoggedIn.logIn();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        });
-                        ps.play();
-                    } catch(Exception e) {
-                        System.out.println("Error in refreshing schedule pane...");
-                    }
+                try {
+                    PauseTransition ps = new PauseTransition(Duration.seconds(1));
+                    ps.setOnFinished(event -> {
+                        try {
+                            MainPane mp = (MainPane) Main.getMainPane();
+                            mp.resetSchedule();
+                            UserLoggedIn.logIn();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    ps.play();
+                } catch (Exception e) {
+                    System.out.println("Error in refreshing schedule pane...");
                 }
-                else {
-                    error.setTextFill(Color.RED);
-                    error.setText("Incorrect username or password. Please try again.");
-                    password.clear();
-                }
-            } catch(Exception e) {
+            }catch (LoginException e){
+                error.setTextFill(Color.RED);
+                error.setText("Incorrect username or password. Please try again.");
+                password.clear();
+            }catch (SocketTimeoutException e) {
+                error.setTextFill(Color.RED);
+                error.setText("Server timed out. Please try again later.");
+            }catch (Exception e) {
+                e.printStackTrace();
                 System.out.println("Error occurred during login");
             }
+        }
+    }
+
+    public void saveClasslist(JSONArray data){
+        File scheduleFile = new File(Schedule.SCHEDULE_PATH);
+        if(scheduleFile.exists()){
+            scheduleFile.delete();
+        }
+        try {
+            scheduleFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try (FileWriter file = new FileWriter(Schedule.SCHEDULE_PATH)) {
+            file.write(data.toJSONString());
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

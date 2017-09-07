@@ -469,7 +469,7 @@ public class CalendarBox extends Pane {
             for (String value : allClasses) {
                 //removes the random space before every class
                 if(!value.substring(1,value.length()).equalsIgnoreCase("free")){
-                    menuItems.add(value.substring(1,value.length()));
+                    menuItems.add(value);
                 }
             }
 //            System.out.println(menuItems);
@@ -512,7 +512,7 @@ public class CalendarBox extends Pane {
                 for (String value : allClasses) {
                     //removes the random space before every class
                     if(!value.substring(1,value.length()).equalsIgnoreCase("free")) {
-                        menuItems.add(value.substring(1, value.length()));
+                        menuItems.add(value);
                     }
                 }
                 dropDown.setVisibleRowCount(8);
