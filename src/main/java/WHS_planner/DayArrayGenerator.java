@@ -3,18 +3,31 @@ package WHS_planner;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 public class DayArrayGenerator {
     public static void main(String[] args) throws IOException{
+        Date schoolStart = null;
+        Date schoolEnd = null;
+        try {
+            schoolStart = new SimpleDateFormat("MM/dd/yyyy", Locale.US).parse("09/05/2017");
+            schoolEnd = new SimpleDateFormat("MM/dd/yyyy", Locale.US).parse("06/30/2018");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         ArrayList<String[]> dates = new ArrayList<>(); //Store days with school [date,ID]
         ArrayList<String[]> days = new ArrayList<>(); //Store calendarData days [ID,id]
         ArrayList<String[]> calendarData = new ArrayList<>(); //Letterdata [letter,id]
 
-        BufferedReader br = new BufferedReader(new FileReader("/Users/geoffreywang/IdeaProjects/WHS Planner/whs_planner/src/main/resources/2017.csv")); //Path to csv file
+        BufferedReader br = new BufferedReader(new FileReader("/Users/student/Downloads/2017.csv")); //Path to csv file
         String string = br.readLine();
+
+        dates.add(new String[]{"9/5","0"});
+
         int counter = 0;
         while(string != null) {
             String[] strings = string.split(",[^-\\s]");
@@ -39,21 +52,22 @@ public class DayArrayGenerator {
                         e.printStackTrace();
                     }
                     date = outputDateFormat.format(dateObj);
-                    System.out.println(date);
 
-
-                    dates.add(new String[]{date,counter+""});
-                    days.add(new String[]{counter+"",counter+""});
-                    calendarData.add(new String[]{letterDay,counter+""});
-                    counter++;
+                    if((dateObj.after(schoolStart)&&dateObj.before(schoolEnd))||dateObj.equals(schoolStart)||dateObj.equals(schoolEnd)) {
+                        dates.add(new String[]{date, (counter+1) + ""});
+                        days.add(new String[]{counter + "", counter + ""});
+                        calendarData.add(new String[]{letterDay, counter + ""});
+                        counter++;
+                    }
                 }
             }
             string = br.readLine();
         }
         br.close();
-        System.out.println(dates);
-        System.out.println(days);
-        System.out.println(calendarData);
+
+        days.add(new String[]{days.size()+"",days.size()+""});
+        calendarData.add(new String[]{"A"+"",calendarData.size()+""});
+
 
         String output = "";
         output += "{\"@dates\":[";
