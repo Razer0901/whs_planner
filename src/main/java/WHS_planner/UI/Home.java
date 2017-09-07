@@ -17,6 +17,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
@@ -105,6 +106,7 @@ class Home extends Pane {
         dayView.prefHeightProperty().bind(dayScroll.heightProperty());
         dayView.setMinWidth(280);
         dayView.setMaxWidth(280);
+//        dayView.setPadding(new Insets(25,0,0,0));
         getTasks();
 
         insidePane.setPadding(new Insets(0, 5, 5, 5)); //top, right, bottom, left
@@ -557,13 +559,34 @@ class Home extends Pane {
     }
 
     void getTasks() {
-        ArrayList<Task> tasks = new ArrayList<>();
+        System.out.println("GET TASKS CALLED ---------");
+        ArrayList tasks = new ArrayList<>();
 
         for (int i = 0; i < calYear.getYear().length; i++) {
             CalendarBox[][] calBoxes = calYear.getYear()[i].getBoxes();
             for (int j = 0; j < calBoxes.length; j++) {
                 for (int k = 0; k < calBoxes[0].length; k++) {
                     if(calBoxes[j][k]!=null){
+                        if (calBoxes[j][k].getTasks().get(0).size() > 0){
+
+//                            Text taskDate = calBoxes[j][k].getDateLabel();
+//                            tasks.add(taskDate);
+
+                            //check to see if there are any alive tasks before adding date
+                            boolean noneExist = true;
+                            for (int l = 0; l < calBoxes[j][k].getTasks().get(0).size(); l++) {
+                                if (calBoxes[j][k].getTasks().get(0).get(l).doesExist()) {
+                                    noneExist = false;
+                                }
+                            }
+                            if (noneExist == false) {
+                                tasks.add(new Text(Integer.toString(calBoxes[j][k].getDate())));
+
+                            }
+
+                            System.out.println(calBoxes[j][k].getTasks().get(0).size() + "date " + calBoxes[j][k].getDate());
+                        }
+                        //extra loop,0th index of task array array is tasks we want
                         for (int l = 0; l < calBoxes[j][k].getTasks().size(); l++) {
                             for (int m = 0; m < calBoxes[j][k].getTasks().get(l).size(); m++) {
                                 if(calBoxes[j][k].getTasks().get(l).get(m).doesExist()) {
@@ -573,11 +596,13 @@ class Home extends Pane {
                             }
 //                            tasks.addAll(calBoxes[j][k].getTasks().get(l));
                         }
+
                     }
                 }
             }
         }
         dayView.getChildren().clear();
+
         if(tasks.isEmpty()) {
             Label cleared = new Label("All caught up!");
 //            BorderPane noTasksPane = new BorderPane();
@@ -603,10 +628,17 @@ class Home extends Pane {
 //            dayView.getChildren().addAll(noTasksPane);
             dayView.getChildren().addAll(cleared);
         } else {
-            for (Task task : tasks) {
-
-                dayView.getChildren().addAll(task.getPane());
+            for (Object task : tasks) {
+                if (task instanceof Task) {
+                    dayView.getChildren().addAll(((Task) task).getPane());
+                } else if (task instanceof Text) {
+                    dayView.getChildren().addAll((Text) task);
+//                    dayView.getChildren().addAll(new Label(new String(Integer.toString(tasks.get(i)))));
+                }
             }
+//            for (Task task : tasks) {
+//                dayView.getChildren().addAll(task.getPane());
+//            }
         }
 
     }
