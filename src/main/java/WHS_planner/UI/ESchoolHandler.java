@@ -108,7 +108,6 @@ public class ESchoolHandler {
             for (int i = 0; i < dataKeys.size(); i++) {
                 rawCourse.put(dataKeys.get(i).text(),rowData.get(i).text());
             }
-
             //Finalize course JSONObject (rename keys for future use)
             JSONObject course = new JSONObject();
             course.put("name",rawCourse.get("Description"));

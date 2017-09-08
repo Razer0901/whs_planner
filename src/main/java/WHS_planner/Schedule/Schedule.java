@@ -20,10 +20,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Map;
+import java.util.*;
 
 public class Schedule
 {
@@ -162,18 +159,30 @@ public class Schedule
                 JSONObject course = (JSONObject) rawCourse;
                 String[] days = ((String) course.get("days")).split(", ");
                 ArrayList<Integer> letterDays = new ArrayList<>();
-                for(String day: days){
-                    char[] ch  = day.toCharArray();
-                    for(char c : ch)
-                    {
-                        int temp = (int)c;
+                for (String day : days) {
+                    char[] ch = day.toCharArray();
+                    for (char c : ch) {
+                        int temp = (int) c;
                         int temp_integer = 64; //for upper case
-                        if(temp<=90 & temp>=65)
-                            letterDays.add(temp-temp_integer-1);
+                        if (temp <= 90 & temp >= 65)
+                            letterDays.add(temp - temp_integer - 1);
                     }
                 }
-
-                for(int letterDay: letterDays){
+                Date[] quarterStartDates = {new Date(2017, 9, 5), new Date(2017, 11, 13), new Date(2018, 1, 29), new Date(2018, 4, 9)}; //Hey bitch boys who are maintaining this program. Fix this next year. -Autism #4
+                Date today = Calendar.getInstance().getTime();
+                String quarter = "";
+                if ((quarterStartDates[0].before(today) && quarterStartDates[1].after(today)) || quarterStartDates[0].equals(today)){
+                    quarter = "Q1";
+                } else if ((quarterStartDates[1].before(today) && quarterStartDates[2].after(today)) || quarterStartDates[1].equals(today)) {
+                    quarter = "Q2";
+                } else if ((quarterStartDates[2].before(today) && quarterStartDates[3].after(today)) || quarterStartDates[2].equals(today)) {
+                    quarter = "Q3";
+                } else if (quarterStartDates[3].before(today) || quarterStartDates[3].equals(today)){
+                    quarter = "Q4";
+                }
+                System.out.println(course.get("quarters") + " q " + quarter);
+                if (((String)course.get("quarters")).contains(quarter)) {
+                    for (int letterDay : letterDays) {
 //                    int tempBlock = Arrays.asList(periodGrid[letterDay%4]).indexOf(Integer.parseInt((String)course.get("period")));
 //
 //                    ScheduleBox tempBox = (ScheduleBox) getNodeByRowColumnIndex(tempBlock,letterDay,this);
@@ -181,51 +190,57 @@ public class Schedule
 //                    tempBox.setTeacher(((String)course.get("teacher")).split(",")[0]);
 //                    tempBox.setPeriod((String)course.get("period"));
 //                    tempBox.setRoom((String)course.get("room"));
+                        String s = (String) course.get("name") + "\n" + ((String) course.get("teacher")).split(",")[0] + "\n" + (String) course.get("room") + "\n" + "Period:" + (String) course.get("period");
 
-                    String s = (String)course.get("name")+"\n"+((String)course.get("teacher")).split(",")[0]+"\n"+(String)course.get("room")+"\n"+ "Period:" + (String)course.get("period");
+                        String letter;
 
-                    String letter;
+                        switch (letterDay) {
+                            case 0:
+                                letter = "A";
+                                break;
+                            case 1:
+                                letter = "B";
+                                break;
+                            case 2:
+                                letter = "C";
+                                break;
+                            case 3:
+                                letter = "D";
+                                break;
+                            case 4:
+                                letter = "E";
+                                break;
+                            case 5:
+                                letter = "F";
+                                break;
+                            case 6:
+                                letter = "G";
+                                break;
+                            case 7:
+                                letter = "H";
+                                break;
+                            default:
+                                letter = "Time";
+                                break;
+                        }
 
-                    switch(letterDay)
-                    {
-                        case 0: letter = "A";
-                            break;
-                        case 1: letter = "B";
-                            break;
-                        case 2: letter = "C";
-                            break;
-                        case 3: letter = "D";
-                            break;
-                        case 4: letter = "E";
-                            break;
-                        case 5: letter = "F";
-                            break;
-                        case 6: letter = "G";
-                            break;
-                        case 7: letter = "H";
-                            break;
-                        default: letter = "Time";
-                            break;
-                    }
-
-                    int tempBlock = Arrays.asList(periodGrid[letterDay%4]).indexOf(Integer.parseInt((String)course.get("period")));
+                        int tempBlock = Arrays.asList(periodGrid[letterDay % 4]).indexOf(Integer.parseInt((String) course.get("period")));
 
 //                    System.out.println("letterDay: " + letterDay + " letter: " + letter + " tempBLock: " + tempBlock + " incr2: " + incr2);
 
-                    int block = tempBlock+1;
+                        int block = tempBlock + 1;
 
-                    Label l = (Label) labels.get(letter+(tempBlock+1));
-                    l.setText(s);
-                    l.setWrapText(true);
+                        Label l = (Label) labels.get(letter + (tempBlock + 1));
+                        l.setText(s);
+                        l.setWrapText(true);
 
-                    incr++;
-                    if(incr == 8)
-                    {
-                        incr = 0;
-                        incr2++;
+                        incr++;
+                        if (incr == 8) {
+                            incr = 0;
+                            incr2++;
+                        }
                     }
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();
