@@ -21,11 +21,13 @@ public class Main extends Application {
 
     public static final String SAVE_FOLDER = System.getenv("HOME") + File.separator + "Library" + File.separator + "Application Support" + File.separator + "WHS Planner";
 
-    public static final String VERSION_NUMBER = "1.5";
+    public static final String VERSION_NUMBER = "1.5.1";
 
     public static final String UPDATE_NOTES =
-            "===== CHANGES =====\n " +
-                    "- eSchoolPlus integration";
+            "========== CHANGES ==========\n" +
+            " - eSchoolPlus integration\n"+
+            " - Allows printing of the eSchoolPlus schedule in GRID FORM!\n" +
+            "       Find it in the options menu!";
 
     public static boolean isFirstStartup = false;
     public static boolean isFirstTimeOnVersion = false;
@@ -108,7 +110,7 @@ public class Main extends Application {
 //                System.out.println(!br.readLine().contains("flag"));
                 boolean flagCheck = !br.readLine().contains("flag");
                 if (br.readLine() == null || flagCheck) {
-                    System.out.println("in");
+//                    System.out.println("in");
                     needToPasteDayArray = true;
                     dayArrayFile.delete();
                 }

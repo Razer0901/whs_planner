@@ -180,7 +180,7 @@ public class Schedule
                 } else if (quarterStartDates[3].before(today) || quarterStartDates[3].equals(today)){
                     quarter = "Q4";
                 }
-                System.out.println(course.get("quarters") + " q " + quarter);
+//                System.out.println(course.get("quarters") + " q " + quarter);
                 if (((String)course.get("quarters")).contains(quarter)) {
                     for (int letterDay : letterDays) {
 //                    int tempBlock = Arrays.asList(periodGrid[letterDay%4]).indexOf(Integer.parseInt((String)course.get("period")));

@@ -120,7 +120,7 @@ class Home extends Pane {
             int classIndex = globalTime.getClassIndex();
             if(day.exists() && day.length() > 0 && calendar.getSchedule().isLoggedIn()) {
                 if (classIndex == -1 || pc.getDay(today).length() != 1) {
-                    System.out.println("tooltip is null!");
+//                    System.out.println("tooltip is null!");
                     progressBar.setTooltip(null);
                 } else if (classIndex == -4) {
                     progressBar.setTooltip(tooltip);

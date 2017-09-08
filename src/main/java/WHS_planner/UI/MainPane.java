@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.print.*;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -21,6 +22,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.transform.Scale;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -43,7 +45,9 @@ public class MainPane extends StackPane {
     private final static String ICON_NEWS = "\uf1ea";
     private final static String ICON_FEEDBACK = "\uf044";
     private final static String ICON_ABOUT = "\uf05a";
-//    private final int HOME = 0;
+    private final static String ICON_PRINT = "\uf02f";
+
+    //    private final int HOME = 0;
 //    private final int SCHEDULE = 1;
 //    private final int CALENDAR = 2;
 //    private final int NEWS = 3;
@@ -248,6 +252,47 @@ public class MainPane extends StackPane {
         final StackPane backmanISGay = this;
         bigButton.setOnMouseClicked(event -> {
             VBox info = new VBox();
+            JFXButton buttonPrint = new JFXButton();
+            buttonPrint.setText("      " + ICON_PRINT + "  Print Schedule");
+            buttonPrint.setOnMouseClicked(event1 -> {
+                if (schedule.isLoggedIn()) {
+                    if(drawer.isShown()) {
+                        PrinterJob job = PrinterJob.createPrinterJob();
+                        PageLayout pageLayout = job.getPrinter().createPageLayout(Paper.NA_LETTER, PageOrientation.LANDSCAPE, Printer.MarginType.HARDWARE_MINIMUM);
+
+                        double scaleX
+                                = pageLayout.getPrintableWidth() / schedule.getPane().getBoundsInParent().getWidth();
+                        double scaleY
+                                = pageLayout.getPrintableHeight() / schedule.getPane().getBoundsInParent().getHeight();
+                        Scale scale = new Scale(scaleX, scaleY);
+
+                        schedule.getPane().getTransforms().add(scale);
+
+
+                        Label titleLable = ((Label) schedule.getPane().lookup("#Title3"));  // NEVER DO THIS!!!
+                        String tempText = titleLable.getText();                             // Instead...
+                        titleLable.setText("");                                             // do as I say...
+
+                        if (job != null && job.showPrintDialog(this.getScene().getWindow())) {
+                            boolean success = job.printPage(pageLayout, schedule.getPane());
+                            if (success) {
+                                job.endJob();
+                            }
+                        }
+
+                        titleLable.setText(tempText);                                       // not as I do!
+                        schedule.getPane().getTransforms().remove(scale);
+                    }else{
+                        JFXSnackbar snackbar = new JFXSnackbar(mainPane);
+                        snackbar.show("Open the schedule tab first!", 2000);
+                    }
+                } else{
+                    JFXSnackbar snackbar = new JFXSnackbar(mainPane);
+                    snackbar.show("Log into schedule tab first!", 2000);
+                }
+
+            });
+
             JFXButton button0 = new JFXButton();
             button0.setText("      " + ICON_BELL + "  Show Bell Schedule");
             button0.setOnMouseClicked(event1 -> {
@@ -369,11 +414,12 @@ public class MainPane extends StackPane {
             bell2Check.setText("Bell 2");
             bell2Check.setTranslateX(10);
             bell2Check.setAlignment(Pos.CENTER_LEFT);
-            info.getChildren().addAll(button0, button1, button2, button3, button4, bell2Check);
+            info.getChildren().addAll(buttonPrint, button0, button1, button2, button3, button4, bell2Check);
             info.setAlignment(Pos.TOP_LEFT);
             info.getStylesheets().addAll("UI" + File.separator + "dropDown.css");
             info.setPadding(new Insets(10,0,10,0));
 
+            buttonPrint.getStyleClass().setAll("list-button");
             button0.getStyleClass().setAll("list-button");
             button1.getStyleClass().setAll("list-button");
             button2.getStyleClass().setAll("list-button");
