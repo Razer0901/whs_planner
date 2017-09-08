@@ -26,8 +26,7 @@ public class Main extends Application {
     public static final String UPDATE_NOTES =
             "========== CHANGES ==========\n" +
             " - eSchoolPlus integration\n"+
-            " - Allows printing of the eSchoolPlus schedule in GRID FORM!\n" +
-            "       Find it in the options menu!";
+            " - Allows printing of the eSchoolPlus schedule in GRID FORM! Find it in the options menu!";
 
     public static boolean isFirstStartup = false;
     public static boolean isFirstTimeOnVersion = false;
@@ -107,15 +106,22 @@ public class Main extends Application {
             File dayArrayFile = new File(Main.SAVE_FOLDER + File.separator + "DayArray.json");
             if(dayArrayFile.exists()){
                 BufferedReader br = new BufferedReader(new FileReader(dayArrayFile));
-//                System.out.println(!br.readLine().contains("flag"));
-                boolean flagCheck = !br.readLine().contains("flag");
-                if (br.readLine() == null || flagCheck) {
-//                    System.out.println("in");
+                String readLineData = br.readLine();
+                if(readLineData != null){
+                    boolean flagCheck = !readLineData.contains("flag");
+                    if(flagCheck){
+                        needToPasteDayArray = true;
+                        dayArrayFile.delete();
+                        dayArrayFile.createNewFile();
+                    }
+                }else{
                     needToPasteDayArray = true;
                     dayArrayFile.delete();
+                    dayArrayFile.createNewFile();
                 }
             }else{
                 needToPasteDayArray = true;
+                dayArrayFile.createNewFile();
             }
             if (needToPasteDayArray) {
                 isFirstStartup = true;

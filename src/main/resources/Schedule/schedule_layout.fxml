@@ -46,21 +46,57 @@
             <RowConstraints minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Day" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="B" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="C" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="D" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="F" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="G" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="H" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Day" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Arial"/>
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" >
+               <font>
+                  <Font name="Arial"/>
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="B" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" >
+               <font>
+                  <Font name="Arial"/>
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="C" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" >
+               <font>
+                  <Font name="Arial"/>
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="D" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" >
+               <font>
+                  <Font name="Arial"/>
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" >
+               <font>
+                  <Font name="Arial"/>
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="F" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" >
+               <font>
+                  <Font name="Arial"/>
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="G" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" >
+               <font>
+                  <Font name="Arial"/>
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="H" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" >
+               <font>
+                  <Font name="Arial"/>
+               </font>
+            </Text>
             <Label fx:id="D1" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <padding>
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="A1" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
@@ -68,7 +104,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="B1" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
@@ -76,7 +112,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="C1" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
@@ -84,7 +120,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="E1" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
@@ -92,7 +128,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="F1" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
@@ -100,7 +136,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="G1" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
@@ -108,7 +144,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="H1" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
@@ -116,7 +152,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="A2" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
@@ -124,7 +160,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="B2" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
@@ -132,7 +168,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="C2" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
@@ -140,7 +176,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="D2" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
@@ -148,7 +184,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="E2" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
@@ -156,7 +192,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="F2" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
@@ -164,7 +200,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="G2" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
@@ -172,7 +208,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="H2" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
@@ -180,7 +216,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="A3" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
@@ -188,7 +224,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="B3" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
@@ -196,7 +232,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="C3" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
@@ -204,7 +240,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="D3" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
@@ -212,7 +248,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="E3" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
@@ -220,7 +256,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="F3" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
@@ -228,7 +264,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="G3" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
@@ -236,7 +272,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="H3" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
@@ -244,7 +280,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="A4" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
@@ -252,7 +288,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="B4" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
@@ -260,7 +296,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="C4" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
@@ -268,7 +304,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="D4" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
@@ -276,7 +312,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="E4" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
@@ -284,7 +320,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="F4" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
@@ -292,7 +328,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="G4" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
@@ -300,7 +336,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="H4" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
@@ -308,7 +344,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="A5" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
@@ -316,7 +352,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="B5" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
@@ -324,7 +360,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="C5" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
@@ -332,7 +368,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="D5" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
@@ -340,7 +376,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="E5" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
@@ -348,7 +384,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="F5" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
@@ -356,7 +392,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="G5" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
@@ -364,7 +400,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="H5" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
@@ -372,7 +408,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="A6" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
@@ -380,7 +416,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="B6" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
@@ -388,7 +424,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="C6" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
@@ -396,7 +432,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="D6" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
@@ -404,7 +440,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="E6" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
@@ -412,7 +448,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="F6" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
@@ -420,7 +456,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="G6" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
@@ -428,7 +464,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="H6" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
@@ -436,7 +472,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="Time1" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
@@ -447,7 +483,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="Time2" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
@@ -458,7 +494,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="Time3" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
@@ -469,7 +505,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="Time4" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
@@ -480,7 +516,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="Time5" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
@@ -491,7 +527,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Label fx:id="Time6" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
@@ -502,7 +538,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial" size="11.0" />
                </font>
             </Label>
          </children>

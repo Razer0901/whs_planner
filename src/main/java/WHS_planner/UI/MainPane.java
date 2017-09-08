@@ -264,7 +264,7 @@ public class MainPane extends StackPane {
                                 = pageLayout.getPrintableWidth() / schedule.getPane().getBoundsInParent().getWidth();
                         double scaleY
                                 = pageLayout.getPrintableHeight() / schedule.getPane().getBoundsInParent().getHeight();
-                        Scale scale = new Scale(scaleX, scaleY);
+                        Scale scale = new Scale(scaleX, scaleX); //Uniform Scaling
 
                         schedule.getPane().getTransforms().add(scale);
 
@@ -414,7 +414,7 @@ public class MainPane extends StackPane {
             bell2Check.setText("Bell 2");
             bell2Check.setTranslateX(10);
             bell2Check.setAlignment(Pos.CENTER_LEFT);
-            info.getChildren().addAll(buttonPrint, button0, button1, button2, button3, button4, bell2Check);
+            info.getChildren().addAll(button0, button1, buttonPrint, button2, button3, button4, bell2Check);
             info.setAlignment(Pos.TOP_LEFT);
             info.getStylesheets().addAll("UI" + File.separator + "dropDown.css");
             info.setPadding(new Insets(10,0,10,0));

@@ -78,7 +78,7 @@ public class Schedule
         for (int i = 1; i <= 7; i++) {
             Label l = (Label) labels.get("Time"+i);
             String s;
-            s = "Period " + i + "\nStart: " + startTimes[i - 1] + "\nEnd:" + endTimes[i - 1];
+            s = "Period " + i + "\nStart: " + startTimes[i - 1] + "\nEnd: " + endTimes[i - 1];
             l.setText(s);
             l.setWrapText(true);
         }
@@ -90,11 +90,11 @@ public class Schedule
             Label l = (Label) labels.get("Time"+i);
             String s;
             if(Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == 4) {
-                s = "Period " + i + "\nStart: " + wens[i - 1] + "\nEnd:" + wene[i - 1];
+                s = "Period " + i + "\nStart: " + wens[i - 1] + "\nEnd: " + wene[i - 1];
             } else if (checkBox.isSelected()) {
-                s = "Period " + i + "\nStart: " + bells[i - 1] + "\nEnd:" + belle[i - 1];
+                s = "Period " + i + "\nStart: " + bells[i - 1] + "\nEnd: " + belle[i - 1];
             } else {
-                s = "Period " + i + "\nStart: " + start[i - 1] + "\nEnd:" + end[i - 1];
+                s = "Period " + i + "\nStart: " + start[i - 1] + "\nEnd: " + end[i - 1];
             }
             l.setText(s);
             l.setWrapText(true);
@@ -256,16 +256,16 @@ public class Schedule
             if(Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == 4)
             {
 //                s = "Period "+i+"\nStart: "+"\n"+wens[i-1]+"\nEnd:\n"+wene[i-1];
-                s = "Period " + i + "\nStart: " + wens[i - 1] + "\nEnd:" + wene[i - 1];
+                s = "Period " + i + "\nStart: " + wens[i - 1] + "\nEnd: " + wene[i - 1];
 
             } else if (checkBox.isSelected()) {
-                s = "Period " + i + "\nStart: " + bells[i - 1] + "\nEnd:" + belle[i - 1];
+                s = "Period " + i + "\nStart: " + bells[i - 1] + "\nEnd: " + belle[i - 1];
             }
 
             else
             {
 //                s = "Period "+i+"\nStart: "+"\n"+start[i-1]+"\nEnd:\n"+end[i-1];
-                s = "Period " + i + "\nStart: " + start[i - 1] + "\nEnd:" + end[i - 1];
+                s = "Period " + i + "\nStart: " + start[i - 1] + "\nEnd: " + end[i - 1];
 
             }
 
@@ -348,16 +348,16 @@ public class Schedule
 //            if(Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == 4)
 //            {
 ////                s = "Period "+i+"\nStart: "+"\n"+wens[i-1]+"\nEnd:\n"+wene[i-1];
-//                s = "Period " + i + "\nStart: " + wens[i - 1] + "\nEnd:" + wene[i - 1];
+//                s = "Period " + i + "\nStart: " + wens[i - 1] + "\nEnd: " + wene[i - 1];
 //
 //            } else if (checkBox.isSelected()) {
-//                s = "Period " + i + "\nStart: " + bells[i - 1] + "\nEnd:" + belle[i - 1];
+//                s = "Period " + i + "\nStart: " + bells[i - 1] + "\nEnd: " + belle[i - 1];
 //            }
 //
 //            else
 //            {
 ////                s = "Period "+i+"\nStart: "+"\n"+start[i-1]+"\nEnd:\n"+end[i-1];
-//                s = "Period " + i + "\nStart: " + start[i - 1] + "\nEnd:" + end[i - 1];
+//                s = "Period " + i + "\nStart: " + start[i - 1] + "\nEnd: " + end[i - 1];
 //
 //            }
 //
