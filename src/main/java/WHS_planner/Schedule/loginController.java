@@ -85,6 +85,7 @@ public class loginController implements Initializable
             }catch (LoginException e){
                 error.setTextFill(Color.RED);
                 error.setText("Incorrect username or password. Please try again.");
+                button.setDisable(false);
                 password.clear();
             }catch (SocketTimeoutException e) {
                 error.setTextFill(Color.RED);
