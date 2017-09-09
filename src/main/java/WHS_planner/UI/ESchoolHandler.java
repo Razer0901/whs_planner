@@ -8,14 +8,17 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import javax.net.ssl.*;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 import java.util.Map;
 
 /**
  * Static utility class to handle eSchoolPlus data requests
  */
 public class ESchoolHandler {
-
     //Constants
     private static String ESCHOOL_LOGIN_URL = "https://hac40.eschoolplus.powerschool.com/HAC4_001/Account/LogOn";
     private static String SCHEDULE_URL = "https://hac40.eschoolplus.powerschool.com/HAC4_001/Content/Student/Classes.aspx";
@@ -123,5 +126,46 @@ public class ESchoolHandler {
         }
 
         return courses;
+    }
+
+
+    /**
+     * Does something to ignore bad SSL certificates (copied directly from Stack Overflow)
+     */
+    static {
+        TrustManager[] trustAllCertificates = new TrustManager[] {
+                new X509TrustManager() {
+                    @Override
+                    public X509Certificate[] getAcceptedIssuers() {
+                        return null; // Not relevant.
+                    }
+                    @Override
+                    public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                        // Do nothing. Just allow them all.
+                    }
+                    @Override
+                    public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                        // Do nothing. Just allow them all.
+                    }
+                }
+        };
+
+        HostnameVerifier trustAllHostnames = new HostnameVerifier() {
+            @Override
+            public boolean verify(String hostname, SSLSession session) {
+                return true; // Just allow them all.
+            }
+        };
+
+        try {
+            System.setProperty("jsse.enableSNIExtension", "false");
+            SSLContext sc = SSLContext.getInstance("SSL");
+            sc.init(null, trustAllCertificates, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+            HttpsURLConnection.setDefaultHostnameVerifier(trustAllHostnames);
+        }
+        catch (GeneralSecurityException e) {
+            throw new ExceptionInInitializerError(e);
+        }
     }
 }
