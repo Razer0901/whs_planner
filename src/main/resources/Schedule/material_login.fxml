@@ -12,7 +12,7 @@
 <?import javafx.scene.text.*?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" style="-fx-background-color: #F7F7F7;" xmlns="http://javafx.com/javafx/8.0.65" fx:controller="WHS_planner.Schedule.loginController">
     <children>
-        <Pane fx:id="loginPane" maxHeight="360.0" maxWidth="360.0" minHeight="360.0" minWidth="360.0" prefHeight="360.0" prefWidth="360.0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 15, 0, 1, 2, 0); -fx-background-color: #FFFFFF;">
+        <Pane fx:id="loginPane" maxHeight="380.0" maxWidth="360.0" minHeight="380.0" minWidth="360.0" prefHeight="380.0" prefWidth="360.0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 15, 0, 1, 2, 0); -fx-background-color: #FFFFFF;">
             <children>
                 <Label layoutX="31.0" layoutY="22.0" text="Login to eSchoolPlus">
                     <font>
@@ -34,7 +34,7 @@
                         <Font name="Roboto" size="13.0" />
                     </font>
                 </JFXPasswordField>
-                <JFXButton fx:id="button" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="45.0" layoutY="290.0" onAction="#submit" prefWidth="270.0" style="-fx-padding: 0.7em 0.57em; -fx-background-color: #0079F5;" text="Sign in" textFill="WHITE">
+                <JFXButton fx:id="button" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="45.0" layoutY="300.0" onAction="#submit" prefWidth="270.0" style="-fx-padding: 0.7em 0.57em; -fx-background-color: #0079F5;" text="Sign in" textFill="WHITE">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -42,7 +42,7 @@
                         <Font name="Roboto" size="14.0" />
                     </font>
                 </JFXButton>
-                <VBox alignment="CENTER" layoutY="244.0" prefHeight="50.0" prefWidth="360.0">
+                <VBox alignment="CENTER" layoutY="254.0" prefHeight="50.0" prefWidth="360.0">
                     <children>
                         <Label fx:id="error" alignment="CENTER" contentDisplay="CENTER" textAlignment="CENTER" textFill="RED">
                             <font>

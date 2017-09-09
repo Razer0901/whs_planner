@@ -91,6 +91,8 @@ public class loginController implements Initializable
                 error.setTextFill(Color.RED);
                 error.setText("Server timed out. Please try again later.");
             }catch (Exception e) {
+                error.setTextFill(Color.RED);
+                error.setText("Hmmm... something went REALLY wrong!\nPlease contact the devs ASAP!");
                 e.printStackTrace();
                 System.out.println("Error occurred during login");
             }

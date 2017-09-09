@@ -17,8 +17,8 @@ import java.util.Map;
 public class ESchoolHandler {
 
     //Constants
-    private static String ESCHOOL_LOGIN_URL = "https://esp40hac.sungardk12saas.com/HAC4_001/Account/LogOn";
-    private static String SCHEDULE_URL = "https://esp40hac.sungardk12saas.com/HAC4_001/Content/Student/Classes.aspx";
+    private static String ESCHOOL_LOGIN_URL = "https://hac40.eschoolplus.powerschool.com/HAC4_001/Account/LogOn";
+    private static String SCHEDULE_URL = "https://hac40.eschoolplus.powerschool.com/HAC4_001/Content/Student/Classes.aspx";
     private static String USER_AGENT = "Mozilla/5.0"; //Prevents 403 Forbidden errors by mimicking a browser
 
     /**
