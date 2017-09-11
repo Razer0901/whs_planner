@@ -36,13 +36,13 @@ public class TeacherESchoolHandler {
      */
     private static Element getRawCourseTable(String username, String password) throws LoginException, IOException{
         //Logs the user in and grabs the entire schedule page (HTML)
-        Document rawPage = Jsoup.connect(SCHEDULE_URL)
-                .cookies(getLoginCookies(username, password))
-                .userAgent(USER_AGENT)
-                .get();
+//        Document rawPage = Jsoup.connect(SCHEDULE_URL)
+//                .cookies(getLoginCookies(username, password))
+//                .userAgent(USER_AGENT)
+//                .get();
 
-//        File input = new File("/Users/student/IdeaProjects/whs_planner_current/src/main/resources/HomePage.htm");
-//        Document rawPage = Jsoup.parse(input, "UTF-8", "");
+        File input = new File("/Users/student/IdeaProjects/whs_planner_current/src/main/resources/HomePage.htm");
+        Document rawPage = Jsoup.parse(input, "UTF-8", "");
 
         //Extracts the course table (HTML)
         Element rawCourseTable = rawPage.getElementsByTag("tbody").get(0);
@@ -100,47 +100,42 @@ public class TeacherESchoolHandler {
         //Splits rawCourseTable into individual rows
         Elements rawCourses = getRawCourseTable(username, password).getElementsByTag("tr");
 
-        Elements temp = rawCourses.get(3).getElementsByTag("td");
-        System.out.println(temp.get(0).getElementsByClass("sg-period").get(0).text()); // Period
+        //Initializes JSONArray to store courses
+        JSONArray courses = new JSONArray();
 
-        System.out.println(temp.get(1).getElementsByClass("sg-myclasses-link").get(0).attr("title").split("\n")[1]); //Cycle Days
-        System.out.println(temp.get(1).getElementsByClass("sg-myclasses-link").get(0).attr("title").split("\n")[2]); //Quarters
-        System.out.println(temp.get(1).getElementsByClass("sg-myclasses-link").get(0).attr("title").split("\n")[3]); //Quarters
-        System.out.println(temp.get(1).getElementsByClass("sg-myclasses-link").get(0).text()); //Cycle Days
+        String teacher = rawCourses.get(1).getElementsByClass("sg-my-classes-groupby-staff").get(0).text().split(": ")[1];
 
+        for (int i = 3; i < rawCourses.size(); i++) {
+            Elements courseRow = rawCourses.get(i).getElementsByTag("td");
 
-//        //Remove the first row (table headers)
-//        Elements dataKeys = rawCourses.remove(0).getElementsByTag("td");
-//        //Remove the final row (Advisory)
-//        rawCourses.remove(rawCourses.size()-1);
-//
-//        //Initializes JSONArray to store courses
-//        JSONArray courses = new JSONArray();
-//
-//        //Parse data for each row
-//        for(Element row: rawCourses){
-//
-//            //Parse course data into a JSONObject (using table headers as keys)
-//            JSONObject rawCourse = new JSONObject(); //Initializes temp JSONObject to store course data
-//            Elements rowData = row.getElementsByTag("td"); //Splits row cells
-//            for (int i = 0; i < dataKeys.size(); i++) {
-//                rawCourse.put(dataKeys.get(i).text(),rowData.get(i).text());
-//            }
-//            //Finalize course JSONObject (rename keys for future use)
-//            JSONObject course = new JSONObject();
-//            course.put("name",rawCourse.get("Description"));
-//            course.put("id",rawCourse.get("Course"));
-//            course.put("teacher",rawCourse.get("Teacher"));
-//            course.put("period", rawCourse.get("Periods"));
-//            course.put("room", rawCourse.get("Room"));
-//            course.put("quarters", rawCourse.get("Marking Periods"));
-//            course.put("days", rawCourse.get("Days"));
-//
-//            //Add course to final list
-//            courses.add(course);
-//        }
+            String periodNumber = courseRow.get(0).getElementsByClass("sg-period").get(0).text();
 
-        return null;
+            Element courseCell = courseRow.get(1).getElementsByClass("sg-myclasses-link").get(0);
+
+            String[] mouseOver = courseCell.attr("title").split("\n");
+
+            String[] courseName = courseCell.text().split(" \\(");
+
+            String rawRoomText = mouseOver[3].split(": ")[1];
+            String rawQuartersText = mouseOver[2].split(": ")[1];
+
+            String rawDaysText = mouseOver[1].split(": ")[1];
+
+//            Finalize course JSONObject
+            JSONObject course = new JSONObject();
+            course.put("name",courseName[0]);
+            course.put("id",courseName[1].substring(0,courseName[1].length()-1));
+            course.put("teacher",teacher);
+            course.put("period", periodNumber);
+            course.put("room", rawRoomText.substring(0,rawRoomText.length()-1));
+            course.put("quarters", rawQuartersText.substring(0,rawQuartersText.length()-1));
+            course.put("days", rawDaysText.substring(0,rawDaysText.length()-1));
+
+//            Add course to final list
+            courses.add(course);
+        }
+
+        return courses;
     }
 
     /**
@@ -185,7 +180,7 @@ public class TeacherESchoolHandler {
 
     public static void main(String[] args) {
         try {
-            System.out.println(getRawCourseTable("",""));
+            System.out.println(getCourses("",""));
         } catch (LoginException e) {
             e.printStackTrace();
         } catch (IOException e) {

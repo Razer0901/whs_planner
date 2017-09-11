@@ -4,6 +4,7 @@ import WHS_planner.Main;
 import WHS_planner.UI.ESchoolHandler;
 import WHS_planner.UI.LoginException;
 import WHS_planner.UI.MainPane;
+import WHS_planner.UI.TeacherESchoolHandler;
 import WHS_planner.Util.UserLoggedIn;
 import WHS_planner.Util.XorTool;
 import com.jfoenix.controls.JFXPasswordField;
@@ -61,11 +62,31 @@ public class loginController implements Initializable
             error.setText("Please enter your eSchoolPlus information");
         } else {
             try {
-                error.setTextFill(Color.GREEN);
-                error.setText("Logging in, please wait...");
-                loginPane.requestLayout();
-                button.setDisable(true);
-                saveClasslist(ESchoolHandler.getCourses(username,pass));
+                boolean loginSuccess = false;
+
+                try {
+                    error.setTextFill(Color.GREEN);
+                    error.setText("Logging in, please wait...");
+                    loginPane.requestLayout();
+                    button.setDisable(true);
+                    saveClasslist(ESchoolHandler.getCourses(username, pass));
+                    loginSuccess = true;
+                }catch (LoginException ex){
+
+                }
+
+                if(!loginSuccess) {
+                    try {
+                        error.setTextFill(Color.GREEN);
+                        error.setText("Logging in, please wait...");
+                        loginPane.requestLayout();
+                        button.setDisable(true);
+                        saveClasslist(TeacherESchoolHandler.getCourses(username, pass));
+                        loginSuccess = true;
+                    } catch (LoginException ex) {
+
+                    }
+                }
 
                 try {
                     PauseTransition ps = new PauseTransition(Duration.seconds(1));
@@ -82,11 +103,14 @@ public class loginController implements Initializable
                 } catch (Exception e) {
                     System.out.println("Error in refreshing schedule pane...");
                 }
-            }catch (LoginException e){
-                error.setTextFill(Color.RED);
-                error.setText("Incorrect username or password. Please try again.");
-                button.setDisable(false);
-                password.clear();
+
+                if(loginSuccess == false){
+                    error.setTextFill(Color.RED);
+                    error.setText("Incorrect username or password. Please try again.");
+                    button.setDisable(false);
+                    password.clear();
+                }
+
             }catch (SocketTimeoutException e) {
                 error.setTextFill(Color.RED);
                 error.setText("Server timed out. Please try again later.");
