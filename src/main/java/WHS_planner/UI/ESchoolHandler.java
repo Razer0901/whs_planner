@@ -69,7 +69,7 @@ public class ESchoolHandler {
         Map<String, String> loginCookies = loginForm.cookies();
 
         //Login with correct credentials
-        Jsoup.connect(ESCHOOL_LOGIN_URL)
+        Connection.Response login = Jsoup.connect(ESCHOOL_LOGIN_URL)
                 .userAgent(USER_AGENT)
                 .timeout(10000) //Time out at 10 secs
                 .data("Database", "850") //850 is the "ID" for the Wayland PS Live "District"
@@ -78,6 +78,8 @@ public class ESchoolHandler {
                 .cookies(loginCookies)
                 .method(Connection.Method.POST)
                 .execute();
+
+        loginCookies.putAll(login.cookies());
         return loginCookies;
     }
 

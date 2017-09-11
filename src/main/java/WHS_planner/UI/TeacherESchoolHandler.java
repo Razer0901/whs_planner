@@ -45,13 +45,13 @@ public class TeacherESchoolHandler {
 //        Document rawPage = Jsoup.parse(input, "UTF-8", "");
 
         //Extracts the course table (HTML)
-        Element rawCourseTable = rawPage.getElementsByTag("tbody").get(0);
+        Elements rawCourseTable = rawPage.getElementsByTag("tbody");
 
         //Checks if a course table exists (if not, then login failed)
-        if(rawCourseTable == null){
+        if(rawCourseTable.size() == 0){
             throw new LoginException();
         }else{
-            return rawCourseTable;
+            return rawCourseTable.get(0);
         }
     }
 
@@ -74,10 +74,9 @@ public class TeacherESchoolHandler {
         Map<String, String> loginCookies = loginForm.cookies();
 
         //Login with correct credentials
-        Jsoup.connect(ESCHOOL_LOGIN_URL)
+        Connection.Response login = Jsoup.connect(ESCHOOL_LOGIN_URL)
                 .userAgent(USER_AGENT)
                 .timeout(10000) //Time out at 10 secs
-//                .data("Database", "850") //850 is the "ID" for the Wayland PS Live "District"
                 .data("UserName", username)
                 .data("Password", password)
                 .data("tempUN","")
@@ -86,6 +85,7 @@ public class TeacherESchoolHandler {
                 .cookies(loginCookies)
                 .method(Connection.Method.POST)
                 .execute();
+        loginCookies.putAll(login.cookies());
         return loginCookies;
     }
 
