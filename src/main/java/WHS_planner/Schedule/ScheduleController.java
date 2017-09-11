@@ -476,6 +476,15 @@ public class ScheduleController implements Initializable, ActionListener
         return res;
     }
 
+
+    public void clearGrayBox() {
+        for(Pane pane: panes) {
+            pane.setStyle("-fx-background-color: #ffffff");
+
+        }
+    }
+
+    //john's code for graying the current block
     public void setClass() {
 
         int row = 4;

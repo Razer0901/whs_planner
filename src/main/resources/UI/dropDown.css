@@ -10,7 +10,14 @@
     -fx-font-family: 'FontAwesome Regular';
 }
 
+.grayed-out {
+    -fx-text-fill: "252525";
+}
 
+.ungrayed-out {
+    -fx-text-fill: "000000";
+
+}
 
 .label-button {
     -fx-font-size: 14px;

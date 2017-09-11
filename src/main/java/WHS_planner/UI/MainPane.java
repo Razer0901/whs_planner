@@ -7,6 +7,8 @@ import WHS_planner.Schedule.Schedule;
 import WHS_planner.Util.UserLoggedIn;
 import com.jfoenix.controls.*;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -17,18 +19,21 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.OverrunStyle;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.transform.Scale;
+import javafx.util.Duration;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -251,14 +256,31 @@ public class MainPane extends StackPane {
         bigButton.prefHeightProperty().bind(parent.heightProperty());
         final StackPane backmanISGay = this;
         bigButton.setOnMouseClicked(event -> {
+//            System.out.println(schedule.isLoggedIn());
             VBox info = new VBox();
             JFXButton buttonPrint = new JFXButton();
             buttonPrint.setText("      " + ICON_PRINT + "  Print Schedule");
-            buttonPrint.setOnMouseClicked(event1 -> {
-                if (schedule.isLoggedIn()) {
+            buttonPrint.getStylesheets().addAll("UI" + File.separator + "dropDown.css");
+            buttonPrint.setDisable(false);
+            buttonPrint.getStyleClass().setAll("list-button");
+
+            Tooltip tooltip = new Tooltip();
+            buttonPrint.setTooltip(tooltip);
+            hackTooltipStartTiming(tooltip);
+
+            if(schedule.isLoggedIn()) {
+                System.out.println("schedule logged");
+                buttonPrint.setTooltip(null);
+                buttonPrint.setDisable(false);
+                buttonPrint.getStyleClass().addAll("ungrayed-out");
+                buttonPrint.setOnMouseClicked(event1 -> {
                     if(drawer.isShown()) {
                         PrinterJob job = PrinterJob.createPrinterJob();
                         PageLayout pageLayout = job.getPrinter().createPageLayout(Paper.NA_LETTER, PageOrientation.LANDSCAPE, Printer.MarginType.HARDWARE_MINIMUM);
+
+
+                        //ungray
+                        schedule.getScheduleControl().clearGrayBox();
 
                         double scaleX
                                 = pageLayout.getPrintableWidth() / schedule.getPane().getBoundsInParent().getWidth();
@@ -277,21 +299,31 @@ public class MainPane extends StackPane {
                             boolean success = job.printPage(pageLayout, schedule.getPane());
                             if (success) {
                                 job.endJob();
+
+                                //gray
+                                schedule.getScheduleControl().setClass();
                             }
                         }
 
                         titleLable.setText(tempText);                                       // not as I do!
                         schedule.getPane().getTransforms().remove(scale);
-                    }else{
+                    }else {
                         JFXSnackbar snackbar = new JFXSnackbar(mainPane);
                         snackbar.show("Open the schedule tab first!", 2000);
                     }
-                } else{
-                    JFXSnackbar snackbar = new JFXSnackbar(mainPane);
-                    snackbar.show("Log into schedule tab first!", 2000);
-                }
 
-            });
+                });
+
+
+            } else {
+                System.out.println("schedule not logged");
+                tooltip.setText("Log in the Schedule first!");
+                buttonPrint.setDisable(true);
+                buttonPrint.getStyleClass().addAll("grayed-out");
+
+            }
+
+
 
             JFXButton button0 = new JFXButton();
             button0.setText("      " + ICON_BELL + "  Show Bell Schedule");
@@ -307,6 +339,8 @@ public class MainPane extends StackPane {
                 try {
                     schedule.getScheduleControl().logout();
                     UserLoggedIn.logOut();
+                    buttonPrint.setDisable(true);
+                    buttonPrint.getStyleClass().addAll("grayed-out");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -419,7 +453,6 @@ public class MainPane extends StackPane {
             info.getStylesheets().addAll("UI" + File.separator + "dropDown.css");
             info.setPadding(new Insets(10,0,10,0));
 
-            buttonPrint.getStyleClass().setAll("list-button");
             button0.getStyleClass().setAll("list-button");
             button1.getStyleClass().setAll("list-button");
             button2.getStyleClass().setAll("list-button");
@@ -737,5 +770,20 @@ public class MainPane extends StackPane {
         returnPane.setHgap(10);
         returnPane.setPadding(new Insets(10));
         return returnPane;
+    }
+
+    private static void hackTooltipStartTiming(Tooltip tooltip) {
+        try {
+            Field fieldBehavior = tooltip.getClass().getDeclaredField("BEHAVIOR");
+            fieldBehavior.setAccessible(true);
+            Object objBehavior = fieldBehavior.get(tooltip);
+            Field fieldTimer = objBehavior.getClass().getDeclaredField("activationTimer");
+            fieldTimer.setAccessible(true);
+            Timeline objTimer = (Timeline) fieldTimer.get(objBehavior);
+            objTimer.getKeyFrames().clear();
+            objTimer.getKeyFrames().add(new KeyFrame(new Duration(0)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
