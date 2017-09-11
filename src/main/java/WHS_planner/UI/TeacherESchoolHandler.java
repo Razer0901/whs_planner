@@ -80,6 +80,9 @@ public class TeacherESchoolHandler {
 //                .data("Database", "850") //850 is the "ID" for the Wayland PS Live "District"
                 .data("UserName", username)
                 .data("Password", password)
+                .data("tempUN","")
+                .data("tempPW","")
+                .data("btnLogin","")
                 .cookies(loginCookies)
                 .method(Connection.Method.POST)
                 .execute();
@@ -99,6 +102,9 @@ public class TeacherESchoolHandler {
 
         //Splits rawCourseTable into individual rows
         Elements rawCourses = getRawCourseTable(username, password).getElementsByTag("tr");
+
+        //Remove the final row (Advisory)
+        rawCourses.remove(rawCourses.size()-1);
 
         //Initializes JSONArray to store courses
         JSONArray courses = new JSONArray();

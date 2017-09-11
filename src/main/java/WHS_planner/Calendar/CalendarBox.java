@@ -468,7 +468,7 @@ public class CalendarBox extends Pane {
             menuItems.add("None");
             for (String value : allClasses) {
                 //removes the random space before every class
-                if(!value.substring(1,value.length()).equalsIgnoreCase("free")){
+                if(!value.equalsIgnoreCase("free")){
                     menuItems.add(value);
                 }
             }
@@ -511,7 +511,7 @@ public class CalendarBox extends Pane {
                 menuItems.add("None");
                 for (String value : allClasses) {
                     //removes the random space before every class
-                    if(!value.substring(1,value.length()).equalsIgnoreCase("free")) {
+                    if(!value.equalsIgnoreCase("free")) {
                         menuItems.add(value);
                     }
                 }
