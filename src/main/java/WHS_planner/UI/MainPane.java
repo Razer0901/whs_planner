@@ -16,10 +16,9 @@ import javafx.geometry.Pos;
 import javafx.print.*;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.OverrunStyle;
-import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -258,7 +257,12 @@ public class MainPane extends StackPane {
         bigButton.setOnMouseClicked(event -> {
 //            System.out.println(schedule.isLoggedIn());
             VBox info = new VBox();
+
             JFXButton buttonPrint = new JFXButton();
+            SplitPane printContainer = new SplitPane(buttonPrint);
+            printContainer.setStyle("-fx-box-border: transparent; -fx-background-color: 000000;");
+
+
             buttonPrint.setText("      " + ICON_PRINT + "  Print Schedule");
             buttonPrint.getStylesheets().addAll("UI" + File.separator + "dropDown.css");
             buttonPrint.setDisable(false);
@@ -266,12 +270,12 @@ public class MainPane extends StackPane {
 
 
             Tooltip tooltip = new Tooltip();
-            buttonPrint.setTooltip(tooltip);
+            printContainer.setTooltip(tooltip);
             hackTooltipStartTiming(tooltip);
 
             if(schedule.isLoggedIn()) {
 //                System.out.println("schedule logged");
-                buttonPrint.setTooltip(null);
+                printContainer.setTooltip(null);
                 buttonPrint.setDisable(false);
                 buttonPrint.getStyleClass().addAll("ungrayed-out");
                 buttonPrint.setOnMouseClicked(event1 -> {
@@ -341,8 +345,14 @@ public class MainPane extends StackPane {
                 try {
                     schedule.getScheduleControl().logout();
                     UserLoggedIn.logOut();
-                    buttonPrint.setDisable(true);
+
+                    printContainer.setTooltip(tooltip);
+                    tooltip.setText("Log in the Schedule first!");
+                    buttonPrint.getStyleClass().removeAll("ungrayed-out");
                     buttonPrint.getStyleClass().addAll("grayed-out");
+//                    buttonPrint.setStyle("-fx-text-fill: 757575;");
+
+                    buttonPrint.setDisable(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -450,7 +460,7 @@ public class MainPane extends StackPane {
             bell2Check.setText("Bell 2");
             bell2Check.setTranslateX(10);
             bell2Check.setAlignment(Pos.CENTER_LEFT);
-            info.getChildren().addAll(button0, button1, buttonPrint, button2, button3, button4, bell2Check);
+            info.getChildren().addAll(button0, button1, printContainer, button2, button3, button4, bell2Check);
             info.setAlignment(Pos.TOP_LEFT);
             info.getStylesheets().addAll("UI" + File.separator + "dropDown.css");
             info.setPadding(new Insets(10,0,10,0));
