@@ -313,7 +313,7 @@ public class MainPane extends StackPane {
                         schedule.getPane().getTransforms().remove(scale);
                     }else {
                         JFXSnackbar snackbar = new JFXSnackbar(mainPane);
-                        snackbar.show("Open the schedule tab first!", 2000);
+                        snackbar.show("Open the Schedule tab first!", 2000);
                     }
 
                 });
@@ -321,7 +321,7 @@ public class MainPane extends StackPane {
 
             } else {
 //                System.out.println("schedule not logged");
-                tooltip.setText("Log in the Schedule first!");
+                tooltip.setText("Log into Schedule first!");
                 buttonPrint.getStyleClass().addAll("grayed-out");
 //                System.out.println(buttonPrint.getStyleClass());
 
@@ -347,7 +347,7 @@ public class MainPane extends StackPane {
                     UserLoggedIn.logOut();
 
                     printContainer.setTooltip(tooltip);
-                    tooltip.setText("Log in the Schedule first!");
+                    tooltip.setText("Log into Schedule first!");
                     buttonPrint.getStyleClass().removeAll("ungrayed-out");
                     buttonPrint.getStyleClass().addAll("grayed-out");
 //                    buttonPrint.setStyle("-fx-text-fill: 757575;");
