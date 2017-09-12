@@ -264,12 +264,13 @@ public class MainPane extends StackPane {
             buttonPrint.setDisable(false);
             buttonPrint.getStyleClass().setAll("list-button");
 
+
             Tooltip tooltip = new Tooltip();
             buttonPrint.setTooltip(tooltip);
             hackTooltipStartTiming(tooltip);
 
             if(schedule.isLoggedIn()) {
-                System.out.println("schedule logged");
+//                System.out.println("schedule logged");
                 buttonPrint.setTooltip(null);
                 buttonPrint.setDisable(false);
                 buttonPrint.getStyleClass().addAll("ungrayed-out");
@@ -299,7 +300,6 @@ public class MainPane extends StackPane {
                             boolean success = job.printPage(pageLayout, schedule.getPane());
                             if (success) {
                                 job.endJob();
-
                                 //gray
                                 schedule.getScheduleControl().setClass();
                             }
@@ -316,10 +316,12 @@ public class MainPane extends StackPane {
 
 
             } else {
-                System.out.println("schedule not logged");
+//                System.out.println("schedule not logged");
                 tooltip.setText("Log in the Schedule first!");
-                buttonPrint.setDisable(true);
                 buttonPrint.getStyleClass().addAll("grayed-out");
+//                System.out.println(buttonPrint.getStyleClass());
+
+                buttonPrint.setDisable(true);
 
             }
 

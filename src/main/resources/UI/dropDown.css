@@ -11,7 +11,7 @@
 }
 
 .grayed-out {
-    -fx-text-fill: "252525";
+    -fx-text-fill: "999999";
 }
 
 .ungrayed-out {
