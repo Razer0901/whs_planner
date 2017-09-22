@@ -274,17 +274,18 @@ public class MainPane extends StackPane {
             hackTooltipStartTiming(tooltip);
 
             if(schedule.isLoggedIn()) {
-//                System.out.println("schedule logged");
+
+                //enable print button
                 printContainer.setTooltip(null);
                 buttonPrint.setDisable(false);
                 buttonPrint.getStyleClass().addAll("ungrayed-out");
+
                 buttonPrint.setOnMouseClicked(event1 -> {
                     if(drawer.isShown()) {
                         PrinterJob job = PrinterJob.createPrinterJob();
                         PageLayout pageLayout = job.getPrinter().createPageLayout(Paper.NA_LETTER, PageOrientation.LANDSCAPE, Printer.MarginType.HARDWARE_MINIMUM);
 
-
-                        //ungray
+                        //ungray current block
                         schedule.getScheduleControl().clearGrayBox();
 
                         double scaleX
@@ -304,7 +305,7 @@ public class MainPane extends StackPane {
                             boolean success = job.printPage(pageLayout, schedule.getPane());
                             if (success) {
                                 job.endJob();
-                                //gray
+                                //gray current block
                                 schedule.getScheduleControl().setClass();
                             }
                         }
@@ -320,11 +321,10 @@ public class MainPane extends StackPane {
 
 
             } else {
-//                System.out.println("schedule not logged");
+
+                //disable print button
                 tooltip.setText("Log into Schedule first!");
                 buttonPrint.getStyleClass().addAll("grayed-out");
-//                System.out.println(buttonPrint.getStyleClass());
-
                 buttonPrint.setDisable(true);
 
             }
@@ -346,13 +346,14 @@ public class MainPane extends StackPane {
                     schedule.getScheduleControl().logout();
                     UserLoggedIn.logOut();
 
+
+                    //disable print button after logging out
                     printContainer.setTooltip(tooltip);
                     tooltip.setText("Log into Schedule first!");
                     buttonPrint.getStyleClass().removeAll("ungrayed-out");
                     buttonPrint.getStyleClass().addAll("grayed-out");
-//                    buttonPrint.setStyle("-fx-text-fill: 757575;");
-
                     buttonPrint.setDisable(true);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
