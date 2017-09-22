@@ -36,13 +36,13 @@ public class TeacherESchoolHandler {
      */
     private static Element getRawCourseTable(String username, String password) throws LoginException, IOException{
         //Logs the user in and grabs the entire schedule page (HTML)
-        Document rawPage = Jsoup.connect(SCHEDULE_URL)
-                .cookies(getLoginCookies(username, password))
-                .userAgent(USER_AGENT)
-                .get();
+//        Document rawPage = Jsoup.connect(SCHEDULE_URL)
+//                .cookies(getLoginCookies(username, password))
+//                .userAgent(USER_AGENT)
+//                .get();
 
-//        File input = new File("/Users/student/IdeaProjects/whs_planner_current/src/main/resources/HomePage.htm");
-//        Document rawPage = Jsoup.parse(input, "UTF-8", "");
+        File input = new File("/Users/student/IdeaProjects/whs_planner_current/src/main/resources/HomePage.htm");
+        Document rawPage = Jsoup.parse(input, "UTF-8", "");
 
         //Extracts the course table (HTML)
         Elements rawCourseTable = rawPage.getElementsByTag("tbody");

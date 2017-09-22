@@ -1,10 +1,7 @@
 package WHS_planner.Schedule;
 
 import WHS_planner.Main;
-import WHS_planner.UI.ESchoolHandler;
-import WHS_planner.UI.LoginException;
-import WHS_planner.UI.MainPane;
-import WHS_planner.UI.TeacherESchoolHandler;
+import WHS_planner.UI.*;
 import WHS_planner.Util.UserLoggedIn;
 import WHS_planner.Util.XorTool;
 import com.jfoenix.controls.JFXPasswordField;
@@ -14,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -43,6 +42,81 @@ public class loginController implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        loginPane.setOnDragOver(event -> {
+            if (event.getGestureSource() != loginPane && event.getDragboard().hasFiles()) {
+                /* allow for both copying and moving, whatever user chooses */
+                event.acceptTransferModes(TransferMode.LINK);
+            }
+            event.consume();
+        });
+
+        loginPane.setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+            if (db.hasFiles()) {
+
+                System.out.println(db.getFiles());
+                try {
+                    boolean loginSuccess = false;
+
+                    try {
+                        error.setTextFill(Color.GREEN);
+                        error.setText("Loading...");
+                        loginPane.requestLayout();
+                        button.setDisable(true);
+                        saveClasslist(ScheduleHTMLHandler.getCoursesStudent(db.getFiles().get(0)));
+                        loginSuccess = true;
+                    }catch (LoginException ex){
+
+                    }
+
+                    if(!loginSuccess) {
+                        try {
+                            error.setTextFill(Color.GREEN);
+                            error.setText("Loading...");
+                            loginPane.requestLayout();
+                            button.setDisable(true);
+                            saveClasslist(ScheduleHTMLHandler.getCoursesTeacher(db.getFiles().get(0)));
+                            loginSuccess = true;
+                        } catch (LoginException ex) {
+
+                        }
+                    }
+
+                    try {
+                        PauseTransition ps = new PauseTransition(Duration.seconds(1));
+                        ps.setOnFinished(event1 -> {
+                            try {
+                                MainPane mp = (MainPane) Main.getMainPane();
+                                mp.resetSchedule();
+                                UserLoggedIn.logIn();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        });
+                        ps.play();
+                    } catch (Exception e) {
+                        System.out.println("Error in refreshing schedule pane...");
+                    }
+
+                    if(loginSuccess == false){
+                        error.setTextFill(Color.RED);
+                        error.setText("File doesn't look right... please consult the directions!\nContact the devs if the problem persists!");
+                        button.setDisable(false);
+                        password.clear();
+                    }
+
+                }catch (Exception e) {
+                    error.setTextFill(Color.RED);
+                    error.setText("File doesn't look right... please consult the directions!\nContact the devs if the problem persists!");
+                    e.printStackTrace();
+                    System.out.println("Wrong HTML");
+                }
+                success = true;
+            }
+            event.setDropCompleted(success);
+            event.consume();
+        });
 
         //Initializes the "submit" button style
 //        button.setButtonType(JFXButton.ButtonType.RAISED);

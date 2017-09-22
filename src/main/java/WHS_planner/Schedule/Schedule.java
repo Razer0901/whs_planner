@@ -5,6 +5,7 @@ import WHS_planner.Main;
 import WHS_planner.UI.ESchoolHandler;
 import WHS_planner.UI.LoginException;
 import WHS_planner.UI.ScheduleBox;
+import WHS_planner.UI.ScheduleTutorialController;
 import WHS_planner.Util.XorTool;
 import com.jfoenix.controls.JFXCheckBox;
 import javafx.application.Platform;
@@ -113,27 +114,27 @@ public class Schedule
 
 
         FXMLLoader loader2 = new FXMLLoader();
-        loader2.setLocation(getClass().getResource("/Schedule/material_login.fxml"));
+        loader2.setLocation(getClass().getResource("/UI/ScheduleTutorial.fxml")); ///Schedule/material_login.fxml
 
         login = loader2.load();
 
-        loginController control2 = loader2.getController();
+        ScheduleTutorialController control2 = loader2.getController();
 
 
 
-        login.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-
-                try
-                {
-                    control2.submit();
-                }
-                catch(Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        });
+//        login.setOnKeyPressed(event -> {
+//            if (event.getCode() == KeyCode.ENTER) {
+//
+//                try
+//                {
+//                    control2.submit();
+//                }
+//                catch(Exception e)
+//                {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
         File g = new File(SCHEDULE_PATH);
 

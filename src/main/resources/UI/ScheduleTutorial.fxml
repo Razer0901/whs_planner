@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
+<StackPane fx:id="tutorialPane" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WHS_planner.UI.ScheduleTutorialController">
+    <HBox alignment="CENTER" spacing="50">
+        <children>
+           <VBox spacing="25" maxWidth="Infinity" alignment="CENTER">
+               <children>
+                   <JFXButton fx:id="buttonSafari" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#safari" prefWidth="150.0" style="-fx-padding: 0.4em 0.57em; -fx-background-color: #0079F5;" text="Safari" textFill="WHITE">
+                       <cursor>
+                           <Cursor fx:constant="HAND" />
+                       </cursor>
+                       <font>
+                           <Font name="Roboto" size="14.0" />
+                       </font>
+                   </JFXButton>
+                   <JFXButton fx:id="buttonChrome" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#chrome" prefWidth="150.0" style="-fx-padding: 0.4em 0.57em; -fx-background-color: #EA660F;" text="Chrome" textFill="WHITE">
+                       <cursor>
+                           <Cursor fx:constant="HAND" />
+                       </cursor>
+                       <font>
+                           <Font name="Roboto" size="14.0" />
+                       </font>
+                   </JFXButton>
+                   <JFXButton fx:id="buttonFirefox" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#firefox" prefWidth="150.0" style="-fx-padding: 0.4em 0.57em; -fx-background-color: #0079F5;" text="Firefox" textFill="WHITE">
+                       <cursor>
+                           <Cursor fx:constant="HAND" />
+                       </cursor>
+                       <font>
+                           <Font name="Roboto" size="14.0" />
+                       </font>
+                   </JFXButton>
+                   <JFXButton fx:id="buttonWhy" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#why" prefWidth="150.0" style="-fx-padding: 0.4em 0.57em; -fx-background-color: #0079F5;" text="Why the change?" textFill="WHITE">
+                       <cursor>
+                           <Cursor fx:constant="HAND" />
+                       </cursor>
+                       <font>
+                           <Font name="Roboto" size="14.0" />
+                       </font>
+                   </JFXButton>
+               </children>
+           </VBox>
+
+           <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" spacing="10">
+               <children>
+                   <HBox spacing="25" maxWidth="Infinity" alignment="CENTER">
+                       <children>
+                           <JFXButton fx:id="buttonStudent" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#studentLink" prefWidth="150.0" style="-fx-padding: 0.4em 0.57em; -fx-background-color: #0079F5;" text="Students" textFill="WHITE">
+                               <cursor>
+                                   <Cursor fx:constant="HAND" />
+                               </cursor>
+                               <font>
+                                   <Font name="Roboto" size="14.0" />
+                               </font>
+                           </JFXButton>
+                           <JFXButton fx:id="buttonTeacher" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#teacherLink" prefWidth="150.0" style="-fx-padding: 0.4em 0.57em; -fx-background-color: #0079F5;" text="Teachers" textFill="WHITE">
+                               <cursor>
+                                   <Cursor fx:constant="HAND" />
+                               </cursor>
+                               <font>
+                                   <Font name="Roboto" size="14.0" />
+                               </font>
+                           </JFXButton>
+                       </children>
+                   </HBox>
+                   <ImageView fx:id="imageView" fitHeight="550"  preserveRatio="true" smooth="true">
+                       <image>
+                           <Image url="@Chrome.png" />
+                       </image>
+                   </ImageView>
+               </children>
+           </VBox>
+       </children><padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+    </HBox>
+</StackPane>

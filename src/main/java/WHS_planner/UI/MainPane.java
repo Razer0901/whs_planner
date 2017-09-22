@@ -19,8 +19,10 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -308,6 +310,9 @@ public class MainPane extends StackPane {
                                 //gray current block
                                 schedule.getScheduleControl().setClass();
                             }
+                        }if(job == null){
+                            JFXSnackbar snackbar = new JFXSnackbar(mainPane);
+                            snackbar.show("You have no printers connected...", 2000);
                         }
 
                         titleLable.setText(tempText);                                       // not as I do!
