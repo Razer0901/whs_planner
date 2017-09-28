@@ -111,30 +111,34 @@ public class Schedule
         rootLayout = loader.load();
         scheduleControl = loader.getController();
 
-
-
         FXMLLoader loader2 = new FXMLLoader();
-        loader2.setLocation(getClass().getResource("/UI/ScheduleTutorial.fxml")); ///Schedule/material_login.fxml
 
+
+//      ++++++++++++++++++++ NEW ++++++++++++++++++++
+//        loader2.setLocation(getClass().getResource("/UI/ScheduleTutorial.fxml"));
+//        login = loader2.load();
+//        ScheduleTutorialController control2 = loader2.getController();
+//      ++++++++++++++++++++ NEW ++++++++++++++++++++
+
+//      ++++++++++++++++++++ OLD ++++++++++++++++++++
+        loader2.setLocation(getClass().getResource("/Schedule/material_login.fxml"));
         login = loader2.load();
+        loginController control2 = loader2.getController();
 
-        ScheduleTutorialController control2 = loader2.getController();
+        login.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
 
-
-
-//        login.setOnKeyPressed(event -> {
-//            if (event.getCode() == KeyCode.ENTER) {
-//
-//                try
-//                {
-//                    control2.submit();
-//                }
-//                catch(Exception e)
-//                {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
+                try
+                {
+                    control2.submit();
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+//      ++++++++++++++++++++ OLD ++++++++++++++++++++
 
         File g = new File(SCHEDULE_PATH);
 

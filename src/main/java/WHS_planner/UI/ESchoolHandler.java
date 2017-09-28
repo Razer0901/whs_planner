@@ -65,6 +65,9 @@ public class ESchoolHandler {
                 .userAgent(USER_AGENT)
                 .execute();
 
+        int stringIndex = loginForm.body().indexOf("Wayland PS Live");
+        String schoolCode = loginForm.body().substring(stringIndex - 5,stringIndex-2);
+
         //Save the cookies
         Map<String, String> loginCookies = loginForm.cookies();
 
@@ -72,7 +75,7 @@ public class ESchoolHandler {
         Connection.Response login = Jsoup.connect(ESCHOOL_LOGIN_URL)
                 .userAgent(USER_AGENT)
                 .timeout(10000) //Time out at 10 secs
-                .data("Database", "850") //850 is the "ID" for the Wayland PS Live "District"
+                .data("Database", schoolCode) //850 is the "ID" for the Wayland PS Live "District"
                 .data("LogOnDetails.UserName", username)
                 .data("LogOnDetails.Password", password)
                 .cookies(loginCookies)
